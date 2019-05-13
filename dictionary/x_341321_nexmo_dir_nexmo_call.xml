@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Nexmo Call" max_length="40" name="x_341321_nexmo_dir_nexmo_call" type="collection">
+        <element display="true" label="Phone Number" max_length="40" name="phone_number" type="string"/>
+    </element>
+</database>

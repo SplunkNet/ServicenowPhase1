@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="nexmoNumber" max_length="40" name="x_341321_nexmo_dir_nexmonumber" type="collection">
+        <element label="Phone Number" max_length="40" name="phone_number" type="string"/>
+        <element label="SMS" max_length="40" name="sms" type="boolean"/>
+        <element label="Voice" max_length="40" name="voice" type="boolean"/>
+        <element label="Whatsapp" max_length="40" name="whatsapp" type="boolean"/>
+    </element>
+</database>

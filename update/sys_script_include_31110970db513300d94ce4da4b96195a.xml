@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_341321_nexmo_dir.NotifyNexmoOutboundCallRecipe</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>NotifyNexmoOutboundCallRecipe</name>
+        <script><![CDATA[var NotifyNexmoOutboundCallRecipe = Class.create();
+NotifyNexmoOutboundCallRecipe.prototype = Object.extendsObject(BaseNotifyNexmoCallRecipe, {
+    initialize: function() {
+		BaseNotifyNexmoCallRecipe.prototype.initialize.apply(this, arguments);
+    },
+
+	onStart: function (notifyPhoneNumber, toPhoneNumber) {
+		var notifyGr = this.db.getNotifyNumberByNumber(notifyPhoneNumber);
+		if (notifyGr)
+			this.data.notifyNumberGrId = notifyGr.getUniqueValue();
+		else {
+			gs.error("Could not make call to {0} using Nexmo number {1} as it is not registered in notify_number", [toPhoneNumber, notifyPhoneNumber]);
+			this.end();
+			return;
+		}
+		this.data.toPhoneNumber = toPhoneNumber;
+		this.saveData();
+		var actiondata = this.ctx.getTwimlUrl('callAnswered', this.getCallback('onCallAnswered'));
+		var eventdata = this.ctx.getXmlUrl('primaryCallStatus', this.getCallback('onPrimaryCallStatus'));
+		
+		var actionUrl = actiondata.url;
+		var eventUrl = eventdata.url;
+		gs.info("actionUrl ==>"+actionUrl);
+		gs.info("eventUrl ==>"+eventUrl);
+ 		//var actionUrl2 = 'https://dev67584.service-now.com/api/x_342228_nexmo_dir/nexmo_call_response';
+		//var eventUrl = 'https://vonage-server.apptivo.net/event';	
+		
+		var response = new sn_ws.RESTMessageV2();
+		response.setEndpoint('https://dev78654.service-now.com/api/x_341321_nexmo_dir/jwt');
+		response.setHttpMethod('GET');
+		response.setRequestHeader("Content-type","application/json");
+		response = response.execute();
+		var responsebody = response.getBody();	
+		var obj = JSON.parse(responsebody);
+		var JWToken = obj.result.token;
+		var request = new sn_ws.RESTMessageV2();
+		request.setEndpoint('https://api.nexmo.com/v1/calls');
+		request.setHttpMethod('POST');
+		request.setRequestHeader("Content-type","application/json");
+		request.setRequestHeader("Authorization","Bearer "+JWToken);
+		request.setRequestBody('{"to": [{"number": "'+toPhoneNumber+'","type":"phone"}],"from":{"number":"'+notifyPhoneNumber+'","type": "phone"},"answer_url": ["'+ actionUrl +'"],"event_url": ["'+ eventUrl +'"],"event_method": "GET"};');
+		var responseres = request.execute();
+		var nexmoreqbody = responseres.getBody();
+		var requestString = JSON.parse(nexmoreqbody);	
+		gs.info("responseString"+JSON.stringify(requestString));
+		if (requestString.error) {
+			gs.error("Could not make a call to {0} using Nexmo number {1} due to error {2}", [toPhoneNumber, notifyPhoneNumber, resp.error]);
+			this.end();
+		} else {
+			this.data.callId = requestString.uuid;
+			this.saveData();
+			return this.data.callId;
+		}
+		
+	},
+
+	onCallAnswered: function (p) {
+		gs.info("payload"+p);
+		return "ABNCADADFASFD";
+// 		gs.info("onCallAnswered :"+p);
+// 		var payload = p.payload;
+// 		var callId = payload.uuid[0];
+// 		var answeredBy = "human";
+// 		var isMachine = answeredBy !== "human";
+// 		var h = new TwimlHelper().api();
+// 		if (callId !== this.data.callId) {
+// 			gs.error("Error! Received callback for unexpected call sid " + callId + " while expecting for call sid " + this.data.callId);
+// 			h.say("We received an unexpected callback. Cannot continue. Hanging up.");
+// 			h.hangup();
+// 			return h;
+// 		}
+// 		// get the call record for this call
+// 		var callRecord = this.getCallGr();
+// 		// set who answered the call (machine vs human)
+// 		callRecord = this.db.setIsHuman(callRecord, !isMachine);
+
+// 		// execute the initial activity
+// 		var notifyAction = this.workflow.processAndWaitActivityJ(callRecord);
+// 		gs.info("answered here@!!!@!");
+// // 		var res12s = '[ { "action": "talk", "text": "Please Press 1 to accept, and 2 torespstring.fActions.type reassign ticket.",  "voiceName": "Amy",  "bargeIn": true  },  {  "action": "input",    "timeOut": 1  } ]';
+// // 		res12s.setContentType('application/json');
+// // 		res12s.setStatus(200);
+// // 		return res12s;
+		
+		
+// 		gs.info("Answered notify"+JSON.stringify(notifyAction));
+// 		return this.getTwimlFromAction(notifyAction);
+	},
+	addInputCallStatus: function (p) {
+		gs.info(JSON.stringify(p.uuid[0]) + ' p.uuid[0]');
+		gs.info(JSON.stringify(p.dtmf[0]) + ' p.dtmf[0]');
+		this.nutil.addInputCallStatus(p.uuid[0], p.dtmf[0]);
+	},
+	onPrimaryCallStatus: function (p) {
+		gs.info(JSON.stringify(p) + "payloadstatus");
+		
+		var payload =p.payload;
+		var status = payload.status[0];
+		var callId = payload.uuid[0];
+		
+		if(status=='answered'){
+			var isMachine = false;
+			var callRecord = this.getCallGr();
+		// set who answered the call (machine vs human)
+		callRecord = this.db.setIsHuman(callRecord, !isMachine);
+		
+// 		gs.info(JSON.stringify(callRecord) + ' callRecord');
+ 		gs.info(JSON.stringify(this.workflow) +  '  this.workflow');
+		// execute the initial activity
+		var notifyAction = this.workflow.processAndWaitActivityJ(callRecord);
+		gs.info("Notify Action :==>"+JSON.stringify(notifyAction));
+		gs.info("WorkFlow Text Response==>"+notifyAction.fActions[0].NotifyNexmoOutboundCallRecipe.fText);
+		}
+		
+		
+		if (callId !== this.data.callId) {
+			gs.error("Error! Received status update for unexpected call sid " + callId + " while expecting update for call sid " + this.data.callId);
+			return;
+		}
+		gs.info("8927389kjndskjfhjsdjfjksdfklds");
+		this.nutil.addCallStatusFromPayload(payload);
+
+		if (this.nutil.isCallOver(status))
+			this.end(); // This is the end of journey for this call and its children calls
+	},
+
+    type: 'NotifyNexmoOutboundCallRecipe'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-06 06:45:51</sys_created_on>
+        <sys_id>31110970db513300d94ce4da4b96195a</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>NotifyNexmoOutboundCallRecipe</sys_name>
+        <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
+        <sys_update_name>sys_script_include_31110970db513300d94ce4da4b96195a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-10 14:22:31</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="nexmoapp" max_length="40" name="x_341321_nexmo_dir_nexmoapp" type="collection">
+        <element label="Answer URL" max_length="200" name="answer_url" type="string"/>
+        <element label="API Key" max_length="200" name="api_key" type="string"/>
+        <element label="API Secret" max_length="200" name="api_secret" type="string"/>
+        <element label="Application id" max_length="200" name="application_id" type="string"/>
+        <element label="Application Name" max_length="200" name="application_name" type="string"/>
+        <element label="Application Type" max_length="200" name="application_type" type="string"/>
+        <element label="Event URL" max_length="200" name="event_url" type="string"/>
+        <element label="JWT_Token" max_length="10000" name="jwt_token" type="string"/>
+        <element label="Private key" max_length="10000" name="private_key" type="string"/>
+        <element label="public key" max_length="10000" name="public_key" type="string"/>
+    </element>
+</database>

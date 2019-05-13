@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_341321_nexmo_dir_nexmo_config">
+    <x_341321_nexmo_dir_nexmo_config action="INSERT_OR_UPDATE">
+        <answer_url>https://dev57338.service-now.com/api/x_341317_my_first/nexmo_answer_call/process/twiml/callAnswered</answer_url>
+        <api_key>8af12cdf</api_key>
+        <api_secret>V8BtkSIpqfwq9KWF</api_secret>
+        <application_id>d9379d0b-c757-4de1-be26-b51d2d5a84cd</application_id>
+        <application_name>ServiceNow_App</application_name>
+        <application_type>voice</application_type>
+        <event_url>https://dev57338.service-now.com/api/x_341317_my_first/nexmo_event_call/process/twiml/primaryCallStatus</event_url>
+        <jwt_token/>
+        <private_key>-----BEGIN PRIVATE KEY-----MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5xIDCjpDmQ5pWiA3PjhnRywT5Dxb2b9AfsCng28zwQ/M82XZnaqMmyZyzyoH0InRblsKs3094Q0OOhoHYVsxaPbAofJ+mPHfxZCDQ2v2Ioes6T2iX583huQEBQAq467GERx+8GjUEqBwQBZnQMFY1l0QW6j7M2SyuAQb6kCrUFy0aX2AvFDSZZa8qeWyAv1Liw/RSfPPdFEqUUx0NGvfBYLXGk5ayIDRaQ4nKkIcqO07pgnDv/NmIqJv7m7GEBSpJH5kRv/gXuSpL0I1UqdGKC91bVJvEPJaFg4zhH35CPL3RVeNqmHE+8UpA9wnX3LWMS0efYYQfoif2h34IUoppAgMBAAECggEAAPv6z60YNPQiPvehFRq0ZdFs0RIEpeEhSe2xxxx7CUHe6dFgKHue6i9yylwWFLBTDAIwPWDAh8tZcgmh6f7JveeqRYilgui6nPeSGfEzGzR6bdhqXjWu+FV13ScU93ZePixvTVyZL9FhNq+E6V68MjP/OxzaINU8wJ5GRnEZnP6RIb36hzEVXMMV09DFf5JM/nNoGR9uPXMYXzIINoXEDvWB9rQYYAigYlAKnQ+m6z32UZkBqdMg1oJYxrLqnC947wR6nQk4PL9ENQtNvCn1x5OjlfnWIjFxmmcuWuFX7IT9Yuzk1VSszIEL12d+3tPHpLfgLfE19AkFk77eGAWYlQKBgQDbPS7lTNdmeyIRRKVGublWKrNeyBEnnuSSv3O2XRNGge+eJmbz6iY1/n5TkSO2byAe0EaSiugkYzqQtXcUubjwmmjPUBDPADAyRx9Y/bg0VemN3dlLWZj5oKIsODqz24cPjI8UGgQzoQ0B5Jv0LrCq10c7dasHHJF89f9YDHGazQKBgQDY6o/vbGJdEZXvbxAvG8SCtTBu0J7EZ/X6VfUISHdSWWFMjMdk8aDZugFZiQiRaHDYUzwLfWDj28GCHgG8OzdPn0v6liB9tmdGTatJAXd2GpNapebeIB9uj+PzsKwrQzPQnKr5K7Y92nVCrwtyUAq0RPGxQBg/Rc1QT6O6bmBmDQKBgQDalVS1P3ie73NW3icerbswQuCVRkl8RDpGaWV307KNIK2D82vAEprISJUwwktl78OJlURXhPDQnrJcZuB0JHtUP87xqzUm/VwQNML3WfeXDnUOgbrNGmafs90c028LtXsiMJTSiOHZi9/JHGG1AfwYSQz3Jmk/bOdNPIK6CaYWnQKBgBb4X92ewJvSbOo5/KDAdALTZRmXBfkOeUHVMGl8IwaZaHBOyB6sZ7gmtlXg6QNc5/ZAei9NS6FVeBxrSQvByY2o9MbIdxBY7H7JYsYMXbYoAkqrHtOO20U9/4miv9ik+SuyK3jPZDEQnTI+jxu/1iJY2q9Gdkrc/WzvwgrP/W1RAoGAOPqex6RbWBT7Ela5o89AFK3ajHe8/KMACcFsqW/68Qcl0KnoqeDbfbLWtvhMAESy6C9SOXddfU1t4cY7tqj0CnNuwy1CgTpW0H6GxXLPSbc1PVhZDnrKTQxI6mpI6KDldzDJ4xTPwOYq7cXyZqoeyAx++TdEnHl6X4izi2pVACk=-----END PRIVATE KEY-----</private_key>
+        <public_key>-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAucSAwo6Q5kOaVogNz44Z0csE+Q8W9m/QH7Ap4NvM8EPzPNl2Z2qjJsmcs8qB9CJ0W5bCrN9PeENDjoaB2FbMWj2wKHyfpjx38WQg0Nr9iKHrOk9ol+fN4bkBAUAKuOuxhEcfvBo1BKgcEAWZ0DBWNZdEFuo+zNksrgEG+pAq1BctGl9gLxQ0mWWvKnlsgL9S4sP0Unzz3RRKlFMdDRr3wWC1xpOWsiA0WkOJypCHKjtO6YJw7/zZiKib+5uxhAUqSR+ZEb/4F7kqS9CNVKnRigvdW1SbxDyWhYOM4R9+Qjy90VXjaphxPvFKQPcJ19y1jEtHn2GEH6In9od+CFKKaQIDAQAB-----END PUBLIC KEY-----</public_key>
+        <sys_class_name>x_341321_nexmo_dir_nexmo_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-13 13:06:30</sys_created_on>
+        <sys_id>d96b168fdb153300d94ce4da4b961933</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
+        <sys_update_name>x_341321_nexmo_dir_nexmo_config_d96b168fdb153300d94ce4da4b961933</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-13 13:06:30</sys_updated_on>
+    </x_341321_nexmo_dir_nexmo_config>
+</record_update>

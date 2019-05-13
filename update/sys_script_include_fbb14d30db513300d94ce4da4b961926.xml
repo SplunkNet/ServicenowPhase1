@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_341321_nexmo_dir.NotifyNexmoOutboundSMSRecipe</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>NotifyNexmoOutboundSMSRecipe</name>
+        <script><![CDATA[var NotifyNexmoOutboundSMSRecipe = Class.create();
+NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMSRecipe, {
+    initialize: function() {
+		BaseNotifyNexmoSMSRecipe.prototype.initialize.apply(this, arguments);
+    },
+
+	onStart: function(from, to, body, validityPeriod) {
+		this.data.fromNo = from;
+		if (validityPeriod) {
+			validityPeriod = parseInt(validityPeriod);
+			if (validityPeriod <= 0)
+				validityPeriod = 100;
+		} else
+			validityPeriod = 100;
+		this.data.validityPeriod = validityPeriod;
+		this.saveData();
+
+		//var api = new sn_twilio_direct.TwilioApi();
+		var smsStatusUrl = this.ctx.getXmlUrl('SMSStatus', this.getCallback('onSMSStatus'));
+		var helper = new NexmoHelper();
+		from = helper.getNexmoServiceId(from);
+		from = from.substr(1);
+		//var resp = api.sendSms({from: from, to: to, msg: body, status_url: smsStatusUrl, validity_period: validityPeriod});
+// 		var response = new sn_ws.RESTMessageV2();
+// 		response.setEndpoint('https://dev67584.service-now.com/api/x_342228_nexmo_dir/jwt');
+// 		response.setHttpMethod('GET');
+// 		response.setRequestHeader("Content-type","application/json");
+// 		response = response.execute();
+// 		var responsebody = response.getBody();	
+// 		var obj = JSON.parse(responsebody);
+// 		var JWToken = obj.result.token;
+		var request = new sn_ws.RESTMessageV2();
+// 		request.setEndpoint('https://api.nexmo.com/v0.1/messages');
+// 		request.setHttpMethod('POST');
+// 		request.setRequestHeader("Content-type","application/json");
+// 		request.setBasicAuth("8af12cdf", "V8BtkSIpqfwq9KWF");
+// 		//request.setRequestHeader("Authorization","Bearer "+JWToken);
+// 		tonum = to.substr(1);
+// 		request.setRequestBody('{"to": { "type": "sms", "number":"'+tonum+'"},"from": { "type": "sms", "number":"'+from+'"},"message": {"content": {"type": "text","text":"'+ body+'"}},"event_url": "http://vijayaraman-dev.sirahu.net/deliveryreceipt/"}');
+		request.setEndpoint('https://rest.nexmo.com/sms/json');
+		request.setHttpMethod('POST');
+		request.setRequestHeader("Content-type","application/json");
+		//request.setBasicAuth("8af12cdf", "V8BtkSIpqfwq9KWF");
+		tonum = to.substr(1);
+		request.setRequestBody('{"api_key":"8af12cdf","api_secret":"V8BtkSIpqfwq9KWF","from":"'+from+'","to":"'+tonum+'","text":"helloworld","callback":"http://vijayaraman-dev.sirahu.net/deliveryreceipt"}');
+		var responseres = request.execute();
+		var nexmoreqbody = responseres.getBody();
+		var resp = JSON.parse(nexmoreqbody);
+		gs.info(JSON.stringify(resp)+"werwerewr");
+		if (resp.error) {
+			gs.error("Could not send message to {0} due to error {1}", to, resp.error);
+			this.end();
+		}
+		else {
+			var MessageSid = resp.message_uuid;
+			if (MessageSid)
+				return MessageSid;
+		}
+	},
+
+	onSMSStatus: function (p) {
+		var payload = p.payload;
+		this.nutil.updateMessageStatusFromPayload(p);
+		var messageStatus = payload.MessageStatus? payload.MessageStatus[0]: null;
+		if (messageStatus && this.nutil.isFinalMessageStatus(messageStatus))
+			this.end();
+	},
+
+    type: 'NotifyNexmoOutboundSMSRecipe'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-06 06:48:43</sys_created_on>
+        <sys_id>fbb14d30db513300d94ce4da4b961926</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>NotifyNexmoOutboundSMSRecipe</sys_name>
+        <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
+        <sys_update_name>sys_script_include_fbb14d30db513300d94ce4da4b961926</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-07 13:30:05</sys_updated_on>
+    </sys_script_include>
+</record_update>
