@@ -11,18 +11,14 @@
 		initialize: function () {},
 		create: function () {
 			var ApplicationData = {};
-			//var applicationid = current.getElement('application_id').toString();
-			//ApplicationData.application_id = applicationid;
 			ApplicationData.api_key = current.getElement('api_key').toString();
-			//var encryptedscret = current.getElement('api_secret').toString();
-			//var Encrypter     = new GlideEncrypter();
-			//ApplicationData.api_secret = Encrypter.decrypt(encryptedscret);
 			ApplicationData.api_secret = current.getElement('api_secret').toString();
 			ApplicationData.name = current.getElement('application_name').toString();
 			ApplicationData.type = current.getElement('application_type').toString();
 			ApplicationData.answer_url = current.getElement('answer_url').toString();
 			ApplicationData.event_url = current.getElement('event_url').toString();
-			var base_url = "https://api.nexmo.com/v1/applications/";
+			var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmoapi', 'Default POST');
+			var base_url = sm.getEndpoint();
 			var request = new sn_ws.RESTMessageV2();
 			request.setEndpoint(base_url);
 			request.setHttpMethod('POST');
@@ -76,13 +72,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:40:36</sys_created_on>
         <sys_id>bdef38fcdb113300d94ce4da4b961957</sys_id>
-        <sys_mod_count>38</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>NexmoApplicationCreation</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_bdef38fcdb113300d94ce4da4b961957</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-13 13:29:37</sys_updated_on>
+        <sys_updated_on>2019-05-15 12:55:02</sys_updated_on>
     </sys_script_include>
 </record_update>

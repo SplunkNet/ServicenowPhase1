@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
-        <api_name>x_341321_nexmo_dir.NotifyJsTelephonyDriver</api_name>
+        <api_name>x_341321_nexmo_dir.NexmoNotifyJsTelephonyDriver</api_name>
         <client_callable>false</client_callable>
         <description>Implements extension point global.NotifyJsTelephonyDriver</description>
-        <name>NotifyJsTelephonyDriver</name>
-        <script><![CDATA[var NotifyJsTelephonyDriver = Class.create();
-NotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTelephonyDriver, {
+        <name>NexmoNotifyJsTelephonyDriver</name>
+        <script><![CDATA[var NexmoNotifyJsTelephonyDriver = Class.create();
+NexmoNotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTelephonyDriver, {
     initialize: function() {
 		global.BaseNotifyJsTelephonyDriver.prototype.initialize.apply(this, arguments);
     },
@@ -37,23 +37,24 @@ NotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTele
 		//return 0;
 	},
 
-	getPhoneNumber: function (/*String*/ phoneNumber) {
-		throw 'Not implemented';
-		// {
-		// 	type: 'short_code' | 'long_code',
-		// 	number: 'the_ph_number',
-		// 	sid: 'number_sid',
-		// 	hasVoice: 'true' | 'false',
-		// 	hasSms: 'true' | 'false',
-		// 	hasRecordingSupport: 'true' | 'false',
-		// 	voiceDirectionSupport: 'in' | 'out' | 'both',
-		// 	smsDirectionSupport: 'in' | 'out' | 'both',
-		// }
+	getPhoneNumber: function (/*String*/ phoneNumber) {				
+		var client = new NexmoDirectClient();
+		var resp = client.getPhoneNumber(phoneNumber);
+		if (resp.error) {
+			this.logger.error("Got error while trying to fetch phone number {0}: {1}", [phoneNumber, resp.error]);
+			return;
+		}
+		return resp.ph;
 	},
 
-	getPhoneNumbers: function () {
-		throw 'Not implemented';
-		//return [array of getPhoneNumber() objects];
+	getPhoneNumbers: function () {		
+		var client = new NexmoDirectClient();
+		var resp = client.getPhoneNumbers();
+		if (resp.error) {
+			this.logger.error("Got error while trying to fetch phone numbers: {0}", resp.error);
+			return [];
+		}
+		return resp.phs;
 	},
 
 	getToken: function (/*GlideRecord*/gr) {
@@ -61,10 +62,11 @@ NotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTele
 		//return "token";
 	},
 	
-	sendSMS: function (/*NotifyPhoneNumber*/ notifyPhoneNumber, /*E.164 formatted String*/ toPhoneNumber, /*String*/ messageBody) {
-		throw 'Not implemented';
-		//return "smsSid";
+	 sendSMS: function (/*NotifyPhoneNumber*/ notifyPhoneNumber, /*E.164 formatted String*/ toPhoneNumber, /*String*/ messageBody) {
+		var recipe = new NotifyNexmoOutboundSMSRecipe();
+		return recipe.start(notifyPhoneNumber.getNumber(), toPhoneNumber,messageBody);
 	},
+
 	
 	sendAutonomousBulkSMS: function (/*NotifyPhoneNumber*/ notifyPhoneNumber, /*Array of E.164 formatted Strings*/ toPhoneNumbers, /*String*/ messageBody, /*GlideRecord - Optional*/ source) {
 		// Will be invoked only if the driver returns true from supportsAutonomousBulkSms().
@@ -73,8 +75,8 @@ NotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTele
 	},
 	
 	call: function (/*NotifyPhoneNumber*/ notifyPhoneNumber, /*E.164 formatted String*/ toPhoneNumber) {
-		throw 'Not implemented';
-		//return "callSid";
+		var recipe = new NotifyNexmoOutboundCallRecipe();
+		return recipe.start(notifyPhoneNumber.getNumber(), toPhoneNumber);
 	},
 	
 	kick: function (/*GlideRecord*/ participantRecord) {
@@ -104,22 +106,25 @@ NotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJsTele
 
 	getCapabilities: function () {
 		return [];
-		//reference BaseNotifyJsTelephonyDriver.CAPABILITIES for valid values.
+		//reference BaseNexmoNotifyJsTelephonyDriver.CAPABILITIES for valid values.
 	},
 	
-    type: 'NotifyJsTelephonyDriver'
+	getName: function(){
+		return "NexmoDriver";
+	},
+    type: 'NexmoNotifyJsTelephonyDriver'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 09:31:41</sys_created_on>
         <sys_id>9617e5f8db913300d94ce4da4b961923</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>NotifyJsTelephonyDriver</sys_name>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_name>NexmoNotifyJsTelephonyDriver</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_9617e5f8db913300d94ce4da4b961923</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-06 09:31:41</sys_updated_on>
+        <sys_updated_on>2019-05-15 09:26:22</sys_updated_on>
     </sys_script_include>
 </record_update>
