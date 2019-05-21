@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="wf_workflow_version">
     <wf_workflow_version action="INSERT_OR_UPDATE">
         <active>true</active>
-        <activity_stages>{"stages":{},"subflows":[],"activities":{},"ends":["794a8e74db153300d94ce4da4b9619ad"]}</activity_stages>
+        <activity_stages>{"stages":{},"activities":{},"subflows":[],"ends":["794a8e74db153300d94ce4da4b9619ad"]}</activity_stages>
         <after_business_rules>false</after_business_rules>
         <checked_out/>
         <checked_out_by/>
@@ -33,9 +33,9 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 12:05:23</sys_created_on>
         <sys_id>fd4a8e74db153300d94ce4da4b9619a8</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-06 12:23:54</sys_updated_on>
+        <sys_updated_on>2019-05-21 09:56:48</sys_updated_on>
         <table>incident</table>
         <timezone/>
         <validated>true</validated>
