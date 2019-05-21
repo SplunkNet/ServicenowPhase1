@@ -101,7 +101,7 @@ NexmomlHelperSNC.prototype = {
     if (!this._allTags[tagName])
       throw 'Unexpected tag name. Check your spelling. : ' + tagName;
     if (!this._isValidChild(this._parent, tagName, this._parent._level + 1))
-      throw 'The tag ' + tagName + ' cannot be nested under ' + this._parent._tagName + '. Please refer to Twilio doc - https://www.twilio.com/docs/voice/nexmoml .';
+      throw 'The tag ' + tagName + ' cannot be nested under ' + this._parent._tagName + '. Please refer to Nexmo doc - https://www.nexmo.com/docs/voice/nexmoml .';
     var newCtx = this._getNewModel(tagName, this._parent._level + 1);
     this._parent._children.push(newCtx);
     this._ctx = newCtx;
@@ -492,13 +492,13 @@ NexmomlHelperSNC.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:52:07</sys_created_on>
         <sys_id>d682c1b0db513300d94ce4da4b9619a5</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>NexmomlHelperSNC</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_d682c1b0db513300d94ce4da4b9619a5</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-15 11:56:17</sys_updated_on>
+        <sys_updated_on>2019-05-21 08:54:02</sys_updated_on>
     </sys_script_include>
 </record_update>
