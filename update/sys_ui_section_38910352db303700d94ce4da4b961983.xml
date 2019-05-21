@@ -4,13 +4,13 @@
             <element>application_name</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>524b12cfdb153300d94ce4da4b961937</sys_id>
+            <sys_created_on>2019-05-21 13:19:37</sys_created_on>
+            <sys_id>631beb6ddb253300d94ce4da4b9619ea</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
+            <sys_updated_on>2019-05-21 13:19:37</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>api_key</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>d24b12cfdb153300d94ce4da4b961937</sys_id>
+            <sys_created_on>2019-05-21 13:19:37</sys_created_on>
+            <sys_id>2b1beb6ddb253300d94ce4da4b9619ea</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
+            <sys_updated_on>2019-05-21 13:19:37</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -32,69 +32,13 @@
             <element>api_secret</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>564b12cfdb153300d94ce4da4b961937</sys_id>
+            <sys_created_on>2019-05-21 13:19:37</sys_created_on>
+            <sys_id>ab1beb6ddb253300d94ce4da4b9619ea</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>application_type</element>
-            <position>3</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>d64b12cfdb153300d94ce4da4b961937</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>answer_url</element>
-            <position>4</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>5a4b12cfdb153300d94ce4da4b961937</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>event_url</element>
-            <position>5</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-13 13:06:01</sys_created_on>
-            <sys_id>da4b12cfdb153300d94ce4da4b961937</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-13 13:06:01</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>expire</element>
-            <position>6</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-14 06:53:15</sys_created_on>
-            <sys_id>af8f4a9bdb113300d94ce4da4b961918</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-14 06:53:15</sys_updated_on>
+            <sys_updated_on>2019-05-21 13:19:37</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
