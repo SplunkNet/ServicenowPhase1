@@ -36,11 +36,15 @@
 			var obj = JSON.parse(responsebody);	
 			
 			var gr = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
-			gr.initialize();
+			//gr.initialize();
+			gr.addQuery('internal_name', 'main_and_only');
+			gr.query();
 			var app_id = JSON.stringify(obj.id);
 			var app_private_key = JSON.stringify(obj.keys.private_key);
 			var app_public_key = JSON.stringify(obj.keys.public_key);
-			var app_name = JSON.stringify(obj.name);
+			var app_name = JSON.stringify(obj.name);			
+			while (gr.next()) {
+
 			gr.application_id = app_id.replace(/\"/g, "");
 			gr.application_type = appType.toString();
 			gr.answer_url =  answerurl.toString();
@@ -56,8 +60,13 @@
 			gr.public_key = tmppublic_key;
 			gr.api_key = current.getElement('api_key').toString();
 			gr.api_secret = current.getElement('api_secret').toString();
-			gr.insert();
-			var arrToken = [ApplicationData.api_key, ApplicationData.api_secret, app_id, tmpprivate_key];
+			gr.status = true;
+				gr.update();
+			}
+			var tmpprivate_keys = app_private_key.replace(/\\n/g, "");
+			tmpprivate_keys = tmpprivate_keys.replace(/\"/g, "");
+			//gr.insert();
+			var arrToken = [ApplicationData.api_key, ApplicationData.api_secret,JSON.stringify(obj.id), tmpprivate_keys];
 			this.getJwtToken(arrToken);
 			return arrToken;
 		},
@@ -94,13 +103,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:40:36</sys_created_on>
         <sys_id>bdef38fcdb113300d94ce4da4b961957</sys_id>
-        <sys_mod_count>44</sys_mod_count>
+        <sys_mod_count>45</sys_mod_count>
         <sys_name>NexmoApplicationCreation</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_bdef38fcdb113300d94ce4da4b961957</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-21 13:47:28</sys_updated_on>
+        <sys_updated_on>2019-05-23 14:23:00</sys_updated_on>
     </sys_script_include>
 </record_update>

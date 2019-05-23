@@ -14,7 +14,7 @@
         <form_context_menu>false</form_context_menu>
         <form_link>false</form_link>
         <form_menu_button_v2>false</form_menu_button_v2>
-        <form_style/>
+        <form_style>destructive</form_style>
         <hint/>
         <isolate_script>false</isolate_script>
         <list_action>false</list_action>
@@ -25,33 +25,62 @@
         <list_link>false</list_link>
         <list_save_with_form_button>false</list_save_with_form_button>
         <list_style/>
-        <name>Nexmo PhoneNumber</name>
-        <onclick>getPhoneNumberNexmo()</onclick>
-        <order>200</order>
-        <script><![CDATA[getPhoneNumberNexmo();
-function getPhoneNumberNexmo(){
-	var notify = new sn_notify.NotifyScoped();	
-	var phoneNumbers = notify.getPhoneNumbers();
+        <name>Dis-Connect</name>
+        <onclick>confirmDisconnect()</onclick>
+        <order>100</order>
+        <script><![CDATA[confirmDisconnect();
+function confirmDisconnect() {
+	var rec = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+			  rec.addQuery('internal_name', "main_and_only");
+			  rec.query();
+			  while (rec.next()) {
+				  rec.status= false;
+				  rec.api_key = "";
+				  rec.api_secret = "";
+				  rec.application_id = "";
+				  rec.update();
+			  }
+action.setRedirectURL(current);
+	/*getMessage(['Confirmation', 'Are you sure you want to disconnect?'], function () {
+
+		var gm = new GlideModal('glide_confirm_standard');
+		gm.setTitle(getMessage('Confirmation'));
+		gm.setPreference('title', getMessage('Are you sure you want to disconnect?'));
+		gm.setPreference('warning', 'true');
+		gm.setPreference('onPromptComplete', function () {
+			var ga = new GlideAjax('NexmoDirectClient');
+			// Need to do this else disabling session messages have no effect as all param get prefixed by 0. or some number.
+			ga.disableRunInBatch();
+			ga.addParam('sysparm_name', 'disconnect');
+			ga.addParam('sysparm_config_id', g_form.getUniqueValue());
+			ga.setWantSessionMessages('false');
+			ga.getXML(function (response) {
+				g_form.save();
+			});
+		});
+		gm.render();
+
+	});*/
 }]]></script>
-        <show_insert>false</show_insert>
+        <show_insert>true</show_insert>
         <show_multiple_update>false</show_multiple_update>
         <show_query>false</show_query>
         <show_update>true</show_update>
         <sys_class_name>sys_ui_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2019-05-06 07:19:36</sys_created_on>
+        <sys_created_on>2019-05-23 14:05:21</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>76c801f4db513300d94ce4da4b96191a</sys_id>
-        <sys_mod_count>31</sys_mod_count>
-        <sys_name>Nexmo PhoneNumber</sys_name>
+        <sys_id>9e58ca12dbed7300d94ce4da4b96192c</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Dis-Connect</sys_name>
         <sys_overrides/>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
-        <sys_update_name>sys_ui_action_76c801f4db513300d94ce4da4b96191a</sys_update_name>
+        <sys_update_name>sys_ui_action_9e58ca12dbed7300d94ce4da4b96192c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-23 14:02:57</sys_updated_on>
+        <sys_updated_on>2019-05-23 14:32:38</sys_updated_on>
         <table>x_341321_nexmo_dir_nexmo_config</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

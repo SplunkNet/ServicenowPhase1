@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element attributes="update_synch=true" extends="sys_metadata" label="Nexmo Config" max_length="40" name="x_341321_nexmo_dir_nexmo_config" type="collection">
         <element label="Answer URL" mandatory="true" max_length="1000" name="answer_url" type="string"/>
-        <element label="API Key" mandatory="true" max_length="1000" name="api_key" type="string"/>
+        <element label="API Key" max_length="1000" name="api_key" type="string"/>
         <element label="API Secret" max_length="10000" name="api_secret" type="string"/>
         <element label="Application ID" mandatory="true" max_length="1000" name="application_id" type="string"/>
-        <element label="Application Name" mandatory="true" max_length="1000" name="application_name" type="string"/>
+        <element label="Application Name" max_length="1000" name="application_name" type="string"/>
         <element default="voice" label="Application Type" mandatory="true" max_length="1000" name="application_type" type="string"/>
         <element label="Event URL" mandatory="true" max_length="1000" name="event_url" type="string"/>
         <element label="expire" max_length="40" name="expire" type="glide_date_time"/>
