@@ -19,7 +19,7 @@ if (grIncident.next()) {
 	if(grIncident.application_id){
 		var appID = grIncident.application_id;
 		var apiKey = grIncident.api_key;
-		var apiSecret = grIncident.api_secret;
+		var apiSecret = grIncident.api_secret.getDecryptedValue();
 		
 		var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.applicationstatus', 'Default GET');
 		var endpoint = sm.getEndpoint();
@@ -48,14 +48,14 @@ if (grIncident.next()) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-23 11:24:19</sys_created_on>
         <sys_id>2083e516db6d7300d94ce4da4b9619d0</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>Application Status</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sysauto_script_2083e516db6d7300d94ce4da4b9619d0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-23 13:02:24</sys_updated_on>
+        <sys_updated_on>2019-05-24 13:11:17</sys_updated_on>
         <upgrade_safe>false</upgrade_safe>
     </sysauto_script>
 </record_update>

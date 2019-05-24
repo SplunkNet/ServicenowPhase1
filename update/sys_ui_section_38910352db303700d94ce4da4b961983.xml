@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_ui_section caption="" section_id="38910352db303700d94ce4da4b961983" sys_domain="global" table="x_341321_nexmo_dir_nexmo_config" version="3" view="">
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>application_name</element>
+            <element>api_key</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-23 14:17:00</sys_created_on>
-            <sys_id>636b86d2dbed7300d94ce4da4b9619ed</sys_id>
+            <sys_created_on>2019-05-24 13:04:38</sys_created_on>
+            <sys_id>d574832edb253300d94ce4da4b9619ad</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-23 14:17:00</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>api_key</element>
-            <position>1</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-23 14:17:00</sys_created_on>
-            <sys_id>e36b86d2dbed7300d94ce4da4b9619ed</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-23 14:17:00</sys_updated_on>
+            <sys_updated_on>2019-05-24 13:04:38</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>api_secret</element>
-            <position>2</position>
+            <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-23 14:17:00</sys_created_on>
-            <sys_id>676b86d2dbed7300d94ce4da4b9619ed</sys_id>
+            <sys_created_on>2019-05-24 13:04:38</sys_created_on>
+            <sys_id>9d74832edb253300d94ce4da4b9619ad</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-23 14:17:00</sys_updated_on>
+            <sys_updated_on>2019-05-24 13:04:38</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

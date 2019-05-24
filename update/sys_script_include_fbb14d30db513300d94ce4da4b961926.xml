@@ -42,7 +42,7 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
 		request.setHttpMethod('POST');
 		request.setRequestHeader("Content-type","application/json");
 		tonum = to.substr(1);
-request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secret+'","from":"'+from+'","to":"'+tonum+'","text":"helloworld","callback":"http://vijayaraman-dev.sirahu.net/deliveryreceipt"}');
+request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secret.getDecryptedValue()+'","from":"'+from+'","to":"'+tonum+'","text":"helloworld","callback":"http://vijayaraman-dev.sirahu.net/deliveryreceipt"}');
 		var responseres = request.execute();
 		var nexmoreqbody = responseres.getBody();
 		var resp = JSON.parse(nexmoreqbody);
@@ -72,13 +72,13 @@ request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secre
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:48:43</sys_created_on>
         <sys_id>fbb14d30db513300d94ce4da4b961926</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>NotifyNexmoOutboundSMSRecipe</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_fbb14d30db513300d94ce4da4b961926</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-15 13:57:33</sys_updated_on>
+        <sys_updated_on>2019-05-24 13:10:25</sys_updated_on>
     </sys_script_include>
 </record_update>
