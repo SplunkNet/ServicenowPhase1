@@ -100,7 +100,7 @@ NotifyNexmoOutboundCallRecipe.prototype = Object.extendsObject(BaseNotifyNexmoCa
 		var payload =p.payload;
 		var status = payload.status[0];
 		var callId = payload.uuid[0];
-		
+		var h = new NexmomlHelper().api();
 		/*if(status=='answered'){
 			var isMachine = false;
 			var callRecord = this.getCallGr();
@@ -115,10 +115,13 @@ NotifyNexmoOutboundCallRecipe.prototype = Object.extendsObject(BaseNotifyNexmoCa
 			callRecord = this.db.setIsHuman(callRecord, !isMachine);
 			//execute the initial activity
 			var notifyAction = this.workflow.processAndWaitActivityJ(callRecord);
-			gs.info("Nexmo Call Response ==>"+JSON.stringify(notifyAction));
-			//gs.info("WorkFlow Text Response==>"+notifyAction.fActions[0].NotifyNexmoOutboundCallRecipe.fText);
+			gs.info("Nexmo New Call Response ==>"+JSON.stringify(notifyAction));
+			h.say("We received an unexpected callback. Cannot continue. Hanging up.");
+ 			h.hangup();
+ 			return h;
+			//gs.info("WorkFlow New Text Response==>"+notifyact.fActions[0].properties.fText);
 		}
-		gs.info("status ==> "+status);
+
 		if (callId !== this.data.callId) {
 			gs.error("Error! Received status update for unexpected call sid " + callId + " while expecting update for call sid " + this.data.callId);
 			return;
@@ -135,13 +138,13 @@ NotifyNexmoOutboundCallRecipe.prototype = Object.extendsObject(BaseNotifyNexmoCa
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:45:51</sys_created_on>
         <sys_id>31110970db513300d94ce4da4b96195a</sys_id>
-        <sys_mod_count>55</sys_mod_count>
+        <sys_mod_count>69</sys_mod_count>
         <sys_name>NotifyNexmoOutboundCallRecipe</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_31110970db513300d94ce4da4b96195a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-24 12:15:04</sys_updated_on>
+        <sys_updated_on>2019-05-27 09:09:58</sys_updated_on>
     </sys_script_include>
 </record_update>
