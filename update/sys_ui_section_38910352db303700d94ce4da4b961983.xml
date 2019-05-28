@@ -4,13 +4,13 @@
             <element>api_key</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-27 13:37:38</sys_created_on>
-            <sys_id>46c82663dbe9b300d94ce4da4b9619c1</sys_id>
+            <sys_created_on>2019-05-28 06:17:48</sys_created_on>
+            <sys_id>fcbdc2bfdb213300d94ce4da4b961927</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-27 13:37:38</sys_updated_on>
+            <sys_updated_on>2019-05-28 06:17:48</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>api_secret</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-27 13:37:38</sys_created_on>
-            <sys_id>c6c82663dbe9b300d94ce4da4b9619c1</sys_id>
+            <sys_created_on>2019-05-28 06:17:48</sys_created_on>
+            <sys_id>70bdc2bfdb213300d94ce4da4b961928</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-27 13:37:38</sys_updated_on>
+            <sys_updated_on>2019-05-28 06:17:48</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -32,27 +32,27 @@
             <element>x_341321_nexmo_dir_sn_nexmo_direct_nexmo_direct_show_token_ui.xml</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-27 13:37:38</sys_created_on>
-            <sys_id>4ac82663dbe9b300d94ce4da4b9619c1</sys_id>
+            <sys_created_on>2019-05-28 06:17:48</sys_created_on>
+            <sys_id>f0bdc2bfdb213300d94ce4da4b961928</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter display_value="Nexmo Direct Show Token UI">7b679a67dba9b300d94ce4da4b9619e8</sys_ui_formatter>
+            <sys_ui_formatter display_value="Nexmo Direct Show Token UI">55a6467bdb213300d94ce4da4b9619e1</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-27 13:37:38</sys_updated_on>
+            <sys_updated_on>2019-05-28 06:17:48</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>list_twilio_direct_phone_numbers.xml</element>
+            <element>x_341321_nexmo_dir_list_nexmo_direct_phone_numbers.xml</element>
             <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-05-27 13:37:38</sys_created_on>
-            <sys_id>8ec82663dbe9b300d94ce4da4b9619c1</sys_id>
+            <sys_created_on>2019-05-28 06:17:48</sys_created_on>
+            <sys_id>38bdc2bfdb213300d94ce4da4b961928</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter display_value="List Twilio Phone Numbers">d9f6a223dbe9b300d94ce4da4b96190c</sys_ui_formatter>
+            <sys_ui_formatter display_value="List Nexmo Phone Numbers">69c4423bdb213300d94ce4da4b9619ec</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-05-27 13:37:38</sys_updated_on>
+            <sys_updated_on>2019-05-28 06:17:48</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>
