@@ -8,62 +8,62 @@
         <name>NexmoCallbackApi</name>
         <script><![CDATA[var NexmoCallbackApi = Class.create();
 NexmoCallbackApi.prototype = {
-  Control: function () {
-    this._skipRest = false;
-    this.setSkipRest = function (flag) {
-      this._skipRest = flag;
-    };
-  },
+	Control: function () {
+		this._skipRest = false;
+		this.setSkipRest = function (flag) {
+			this._skipRest = flag;
+		};
+	},
 
     initialize: function() {
     },
-  
-  _invokeCallbacks: function (callbackFor, payload, type) {
-    var gr = new GlideRecord('sn_twilio_direct_callback_processor');
-    gr.addQuery('callback_name', callbackFor);
-    gr.addQuery('response_type', type);
-    gr.orderBy('order');
-    gr.query();
-    var lastResponse;
-    while (gr.next()) {
-      var ctrl = new this.Control();
-      var ev = new GlideScopedEvaluator();
-      ev.putVariable('callbackFor', callbackFor);
-      ev.putVariable('payload', payload);
-      ev.putVariable('lastResponse', lastResponse);
-      ev.putVariable('control', ctrl);
-      ev.withReturnError(true);
-      lastResponse = ev.evaluateScript(gr, 'processor');
-      if (ctrl._skipRest)
-        break;
-    }
-    if (payload.ctx && payload.ctx.length > 0) {
-      var ctxId = payload.ctx[0];
-      var resp = ApiContext.runCallbackListener(ctxId, callbackFor, payload, lastResponse);
-      if (resp)
-        lastResponse = resp;
-    }
-    return lastResponse;
-  },
-  
-  getDefaultNexmomlResponse: function () {
-    var a = new sn_twilio_direct.NexmomlHelper().api();
-    a.say('This is a message from Service Now, Nexmo Direct runtime. We could not successfully process the callback. Disconnecting now.');
-    a.hangup();
-    return a;
-  },
+	
+	_invokeCallbacks: function (callbackFor, payload, type) {
+		var gr = new GlideRecord('sn_twilio_direct_callback_processor');
+		gr.addQuery('callback_name', callbackFor);
+		gr.addQuery('response_type', type);
+		gr.orderBy('order');
+		gr.query();
+		var lastResponse;
+		while (gr.next()) {
+			var ctrl = new this.Control();
+			var ev = new GlideScopedEvaluator();
+			ev.putVariable('callbackFor', callbackFor);
+			ev.putVariable('payload', payload);
+			ev.putVariable('lastResponse', lastResponse);
+			ev.putVariable('control', ctrl);
+			ev.withReturnError(true);
+			lastResponse = ev.evaluateScript(gr, 'processor');
+			if (ctrl._skipRest)
+				break;
+		}
+		if (payload.ctx && payload.ctx.length > 0) {
+			var ctxId = payload.ctx[0];
+			var resp = ApiContext.runCallbackListener(ctxId, callbackFor, payload, lastResponse);
+			if (resp)
+				lastResponse = resp;
+		}
+		return lastResponse;
+	},
+	
+	getDefaultNexmomlResponse: function () {
+		var a = new x_341321_nexmo_dir.NexmomlHelper().api();
+		a.say('This is a message from Service Now, Twilio Direct runtime. We could not successfully process the callback. Disconnecting now.');
+		a.hangup();
+		return a;
+	},
 
-  getNexmomlResponse: function (callbackFor, payload) {
-    return this._invokeCallbacks(callbackFor, payload, 'nexmoml');
-  },
-  
-  getDefaultXmlResponse: function () {
-    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response></Response>";
-  },
-  
-  getXmlResponse: function (callbackFor, payload) {
-    return this._invokeCallbacks(callbackFor, payload, 'xml');
-  },
+	getNexmomlResponse: function (callbackFor, payload) {
+		return this._invokeCallbacks(callbackFor, payload, 'nexmoml');
+	},
+	
+	getDefaultXmlResponse: function () {
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response></Response>";
+	},
+	
+	getXmlResponse: function (callbackFor, payload) {
+		return this._invokeCallbacks(callbackFor, payload, 'xml');
+	},
 
     type: 'NexmoCallbackApi'
 };]]></script>
@@ -71,13 +71,13 @@ NexmoCallbackApi.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:41:10</sys_created_on>
         <sys_id>94004d30db513300d94ce4da4b96191c</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>NexmoCallbackApi</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_94004d30db513300d94ce4da4b96191c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-15 11:58:22</sys_updated_on>
+        <sys_updated_on>2019-05-29 09:56:14</sys_updated_on>
     </sys_script_include>
 </record_update>

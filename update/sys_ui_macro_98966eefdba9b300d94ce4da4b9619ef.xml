@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-27 13:29:20</sys_created_on>
         <sys_id>98966eefdba9b300d94ce4da4b9619ef</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>list_nexmo_direct_phone_numbers</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_macro_98966eefdba9b300d94ce4da4b9619ef</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-28 12:31:35</sys_updated_on>
+        <sys_updated_on>2019-05-29 13:52:40</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" 
 	xmlns:j="jelly:core" 
@@ -31,7 +31,7 @@
 				gr.addQuery("active", true);
 				gr.addQuery("owner","NexmoDriver");
 				gr.query();
-				gr;
+				gr;			
 			</g:evaluate>
 			<div class="ph_data">
 
@@ -44,7 +44,7 @@
 								<!-- <th scope="col" class="territory table-column-header">${gs.getMessage('Territory')}</th> -->
 								<!-- <th scope="col" class="ngrp table-column-header">${gs.getMessage('Notify group')}</th> -->
 								<th scope="col" class="advSms table-column-header">${gs.getMessage('Advanced SMS features')}</th>
-								<th scope="col" class="configStatus table-column-header">${gs.getMessage('Advanced VOICE features')}</th>
+								<th scope="col" class="configStatus table-column-header">${gs.getMessage('Advanced VOICE feature')}</th>
 							</tr>
 						</thead>
 						<tbody id="result" class="list_table_tbody">
