@@ -93,10 +93,12 @@ NotifyNexmoUtilSNC.prototype = {
     var notifyStatus = this.getNormalizedCallStatus(status);
     var db = new global.NotifyDatabase();
     var gr = db.addCallStatus(callId, notifyStatus, seq * 10);
-    if (gr)
-      new global.NotifyWorkflow().broadcastEvent(callId, notifyStatus);
-    if (this.isCallOver(status))
-      db.deleteQueueRecordsForCallSid(callId);
+    if (gr){
+		new global.NotifyWorkflow().broadcastEvent(callId, notifyStatus);
+	}      
+    if (this.isCallOver(status)){
+		db.deleteQueueRecordsForCallSid(callId);
+	}
     return gr;
   },
 
@@ -146,7 +148,7 @@ NotifyNexmoUtilSNC.prototype = {
   },
 
   getNexmomlFromAction: function (actionJ, getUrlCallback) {
-    var h = new NexmomlHelper().api();
+    var h = new x_341321_nexmo_dir.NexmomlHelper().api();
     this._getNexmomlFromActions(h, actionJ.fActions, getUrlCallback);
     var lastChildModel = h.getLastChild();
     if (lastChildModel) {
@@ -156,7 +158,7 @@ NotifyNexmoUtilSNC.prototype = {
         withChildTagName = lastChildModel.getLastChild().getTagName();
       if (lastChildTagName !== 'Redirect')
         h.redirect(this._invokeTCB(getUrlCallback, this.NEXMOML_URL_NAMES.CATCH_ALL, {lastTagName: lastChildTagName, withChildTagName: withChildTagName}));
-    }
+    }	  
     return h;
   },
 
@@ -308,13 +310,13 @@ NotifyNexmoUtilSNC.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:49:54</sys_created_on>
         <sys_id>fd02cd70db513300d94ce4da4b9619a0</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>NotifyNexmoUtilSNC</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_fd02cd70db513300d94ce4da4b9619a0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-28 13:25:01</sys_updated_on>
+        <sys_updated_on>2019-05-30 11:36:45</sys_updated_on>
     </sys_script_include>
 </record_update>

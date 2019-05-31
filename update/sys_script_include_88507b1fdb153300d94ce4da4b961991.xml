@@ -518,15 +518,11 @@
 		disconnect: function () {
 			var appId = this._getHelper().getConfig().application_id;
 			if (appId) {
-				gs.info(appId + '   appIds');
-
 				var resp = this.getIncomingPhoneNumbers();
-				gs.info(JSON.stringify(resp) + 'resp');
 				var params;
 				if (!!resp.error)
 					this.logError(resp);
 				else {
-					gs.info(JSON.stringify(resp.numbers));
 					var numbers = resp.numbers;
 					for (var i in numbers) {
 						params = {};
@@ -537,10 +533,7 @@
 		}
 		}
 		}
-		gs.info(JSON.stringify(params) + '  params');
-		gs.info(appId + '  appIds');
 		var res = this.deleteApplication(appId);
-		gs.info(JSON.stringify(res) + " res");
 		if (res) {
 			if (res.type == 'UNAUTHORIZED')
 				gs.addErrorMessage(gs.getMessage("Nexmo responded with error: {0}", [this._formatErr(res)]));
@@ -573,8 +566,6 @@
 
 			var decryptedStringAsBase64 = gr.api_secret.getDecryptedValue();
 
-		gs.info("Decoded string is " + decryptedStringAsBase64);
-		gs.info(endpoint + 'endpoint');
 		var request = new sn_ws.RESTMessageV2();
 		request.setEndpoint(endpoint + '?api_key=' + gr.api_key + '&api_secret=' + decryptedStringAsBase64);
 		request.setHttpMethod('GET');
@@ -601,7 +592,6 @@
 		
 		var request = new sn_ws.RESTMessageV2();
 		var endpoint = base_url+appId+"?api_key="+gr.api_key+"&api_secret="+decryptedStringAsBase64;
-		gs.info(endpoint + ' endpoint');
 		request.setEndpoint(endpoint);
 		request.setHttpMethod('DELETE');
 		request.setRequestHeader("Content-type", "application/json");
@@ -679,13 +669,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-14 13:58:08</sys_created_on>
         <sys_id>88507b1fdb153300d94ce4da4b961991</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>NexmoDirectClient</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_88507b1fdb153300d94ce4da4b961991</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-29 13:17:19</sys_updated_on>
+        <sys_updated_on>2019-05-30 10:01:29</sys_updated_on>
     </sys_script_include>
 </record_update>
