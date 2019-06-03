@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-27 13:29:20</sys_created_on>
         <sys_id>98966eefdba9b300d94ce4da4b9619ef</sys_id>
-        <sys_mod_count>122</sys_mod_count>
+        <sys_mod_count>169</sys_mod_count>
         <sys_name>list_nexmo_direct_phone_numbers</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_macro_98966eefdba9b300d94ce4da4b9619ef</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-03 06:37:55</sys_updated_on>
+        <sys_updated_on>2019-06-03 13:38:31</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" 
 	xmlns:j="jelly:core" 
@@ -31,9 +31,7 @@
 		font-size: 15px;
 		}		
 		.ph_macro .show {
-		display: block;<j:if test="${!jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
-												Link
-											</j:if>
+		display: block;
 		}
 		.ph_macro #phs .icon {
 		padding: 6px;
@@ -77,32 +75,55 @@
 		.ph_macro #phs.no-advSms .advSms {
 		display: none;
 		}
+		.phbtn{
+		background-color: darkseagreen !important;
+		padding: 5px 20px !important;
+		color: #FFF !important;
+		}
 	</style>
 
 	<tr id="ph_macro_row">
 		<td class="ph_macro">
 
-			<g:evaluate var="jvar_gr" object="true">
-				var gr = new GlideRecord("notify_number");
-				gr.addQuery("active", true);
-				gr.addQuery("owner","NexmoDriver");
-				gr.query();
-				gr;	
-			</g:evaluate>
-
 			<g:evaluate var="jvar_gr1" object="true">
 				var configstatus = new NexmoHelper().isConnectNexmo();
 				var returndata,ph_numberlist, appid;
 				if(configstatus){
-					returndata = new NexmoHelper().newData();					
+					returndata = new NexmoHelper().newData();
+					appid = new NexmoHelper().nexmoAppID();
+					var cnt = returndata.count;
 					if(returndata.count > 0){
 						ph_numberlist = returndata.numbers;
+						for(var i=0; i != cnt; i++){
+							var cval = ph_numberlist[i].voiceCallbackValue;
+							if(!cval){
+								ph_numberlist[i].linkstatus = "Link";
+							}else if(cval.localeCompare(appid) == -1){
+								ph_numberlist[i].linkstatus = "-";
+							}else if(cval.localeCompare(appid) != -1){
+								ph_numberlist[i].linkstatus = "Linked";
+							}	
+						}				
 					}
-					appid = new NexmoHelper().nexmoAppID();
-				} 	
+					
+								
+				} 
+
 				var initial = parseInt(1);
 			</g:evaluate>
-			
+			<script>
+				function connectid(appids){
+					var ga = new GlideAjax('HelloWorld');
+ga.addParam('sysparm_name', 'helloWorld');
+ga.addParam('sysparm_user_name', "Bob");
+ga.getXML(HelloWorldParse);
+ function HelloWorldParse(response) {
+  var answer = response.responseXML.documentElement.getAttribute("answer");
+  alert(answer); }
+
+				}
+				
+			</script>
 			<j:if test="${!configstatus}">
 				<div class="nofndata">
 					Please connect the nexmo account
@@ -133,20 +154,14 @@
 											</j:if>		
 										</td>
 										<td> ${jvar_data.country} </td>
-										<td> 
-											${jvar_data.voiceCallbackValue.length}
-											<j:if test="${!jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
-												Linksdf ${jvar_data.voiceCallbackValue} ${appid}
-											</j:if>
-											<j:if test="${jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
-												- ${jvar_data.voiceCallbackValue} ${appid}
-											</j:if>	
-											
-											
-											
-											<j:if test="${jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue == appid}">
-												Linked ${jvar_data.voiceCallbackValue} ${appid}
-											</j:if>
+										<td>
+											<j:choose>
+											   <j:when test="${jvar_data.linkstatus == 'Link'}">
+												   <button onClick="connectid('${appid}')" class="phbtn">${jvar_data.linkstatus}</button>
+												</j:when>
+											   
+											   <j:otherwise>${jvar_data.linkstatus}</j:otherwise>
+											</j:choose>
 										</td>
 									</tr>	
 									 <g:evaluate>initial = parseInt(initial +1);</g:evaluate>
@@ -158,7 +173,6 @@
 			</j:if>					
 		</td>
 	</tr>
-
 </j:jelly>]]></xml>
     </sys_ui_macro>
 </record_update>
