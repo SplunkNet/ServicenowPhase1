@@ -53,7 +53,7 @@
 		response.setContentType('application/xml');
 		if (resp instanceof NexmomlModel){
 			//response.getStreamWriter().writeString(resp.toXml());
-			var nccotext = '[{"action": "talk","bargeIn": true,"text": "An Incident of priority 1 is assigned to you. You try TTS on INC0936317 Please Press 1 to accept, and 2 to reassign ticket."},{"action": "input",  "submitOnHash": true}]';
+			var nccotext = '[{"action": "talk","bargeIn": true,"text": "'+resp._children[0]._text+'"},{"action": "input",  "submitOnHash": true}]';
 			response.setContentType('application/json');
 			response.getStreamWriter().writeString(nccotext.toString());
 		}else{
@@ -81,14 +81,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-08 11:45:47</sys_created_on>
         <sys_id>c7c81ca1db5d7300d94ce4da4b9619d1</sys_id>
-        <sys_mod_count>56</sys_mod_count>
+        <sys_mod_count>59</sys_mod_count>
         <sys_name>Nexmo Answer Call</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ws_operation_c7c81ca1db5d7300d94ce4da4b9619d1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-30 09:50:45</sys_updated_on>
+        <sys_updated_on>2019-06-03 06:23:21</sys_updated_on>
         <web_service_definition display_value="Nexmo call answer">dab75c61db5d7300d94ce4da4b96195d</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

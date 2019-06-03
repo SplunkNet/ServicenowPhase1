@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-27 13:29:20</sys_created_on>
         <sys_id>98966eefdba9b300d94ce4da4b9619ef</sys_id>
-        <sys_mod_count>117</sys_mod_count>
+        <sys_mod_count>122</sys_mod_count>
         <sys_name>list_nexmo_direct_phone_numbers</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_macro_98966eefdba9b300d94ce4da4b9619ef</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-31 14:02:43</sys_updated_on>
+        <sys_updated_on>2019-06-03 06:37:55</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" 
 	xmlns:j="jelly:core" 
@@ -31,7 +31,9 @@
 		font-size: 15px;
 		}		
 		.ph_macro .show {
-		display: block;
+		display: block;<j:if test="${!jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
+												Link
+											</j:if>
 		}
 		.ph_macro #phs .icon {
 		padding: 6px;
@@ -133,16 +135,17 @@
 										<td> ${jvar_data.country} </td>
 										<td> 
 											${jvar_data.voiceCallbackValue.length}
-											<j:if test="${jvar_data.voiceCallbackValue}">
-												-
-											</j:if>	
 											<j:if test="${!jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
-												Link
+												Linksdf ${jvar_data.voiceCallbackValue} ${appid}
 											</j:if>
+											<j:if test="${jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue != appid}">
+												- ${jvar_data.voiceCallbackValue} ${appid}
+											</j:if>	
+											
 											
 											
 											<j:if test="${jvar_data.voiceCallbackValue &amp;&amp; jvar_data.voiceCallbackValue == appid}">
-												Linked
+												Linked ${jvar_data.voiceCallbackValue} ${appid}
 											</j:if>
 										</td>
 									</tr>	
