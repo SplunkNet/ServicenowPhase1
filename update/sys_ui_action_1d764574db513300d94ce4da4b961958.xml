@@ -41,13 +41,13 @@ function restSpeechAPI(){
 	var phoneNumbers = notify.call(from, tonum);
 	
 	//set up a conference call
-	//var participants = [tonum, '+919080312470'];
-	//var conferenceCall = notify.conferenceCall();
-	//set up the outbound calls for all conference call participants
-	//for (var i in participants) {
-	//	var to = participants[i];
-	//	var phoneNumbers = notify.call(from, to, conferenceCall);
-	//}
+// 	var participants = [tonum, '+919092575766'];
+// 	var conferenceCall = notify.conferenceCall();
+// 	//set up the outbound calls for all conference call participants
+// 	for (var i in participants) {
+// 		var to = participants[i];
+// 		var phoneNumbers = notify.call(from, to, conferenceCall);
+// 	}
 	// feedback
 }]]></script>
         <show_insert>true</show_insert>
@@ -60,7 +60,7 @@ function restSpeechAPI(){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>1d764574db513300d94ce4da4b961958</sys_id>
-        <sys_mod_count>23</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_name>Call</sys_name>
         <sys_overrides/>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
@@ -68,7 +68,7 @@ function restSpeechAPI(){
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_action_1d764574db513300d94ce4da4b961958</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-30 10:03:39</sys_updated_on>
+        <sys_updated_on>2019-06-04 12:04:17</sys_updated_on>
         <table>x_341321_nexmo_dir_nexmo_call</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
