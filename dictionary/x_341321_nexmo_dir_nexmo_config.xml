@@ -10,6 +10,8 @@
         <element label="expire" max_length="40" name="expire" type="glide_date_time"/>
         <element default="main_and_only" label="Internal name" max_length="40" name="internal_name" type="string"/>
         <element label="JWT_Token" max_length="10000" name="jwt_token" type="string"/>
+        <element label="linkmessage" max_length="200" name="linkmessage" type="string"/>
+        <element label="linkstate" max_length="40" name="linkstate" type="boolean"/>
         <element label="Private Key" max_length="10000" name="private_key" type="string"/>
         <element label="Public Key" max_length="10000" name="public_key" type="string"/>
         <element label="status" max_length="40" name="status" type="boolean"/>
