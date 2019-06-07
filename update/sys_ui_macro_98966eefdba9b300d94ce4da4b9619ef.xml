@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-27 13:29:20</sys_created_on>
         <sys_id>98966eefdba9b300d94ce4da4b9619ef</sys_id>
-        <sys_mod_count>188</sys_mod_count>
+        <sys_mod_count>196</sys_mod_count>
         <sys_name>list_nexmo_direct_phone_numbers</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_macro_98966eefdba9b300d94ce4da4b9619ef</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-04 12:06:39</sys_updated_on>
+        <sys_updated_on>2019-06-06 10:02:48</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" 
 	xmlns:j="jelly:core" 
@@ -88,27 +88,27 @@
 			<g:evaluate var="jvar_gr1" object="true">
 				var configstatus = new NexmoHelper().isConnectNexmo();
 				var returndata,ph_numberlist, appid;
+				var bynocnt = 0;
 				if(configstatus){
 					returndata = new NexmoHelper().newData();
 					appid = new NexmoHelper().nexmoAppID();
-					var cnt = returndata.count;
+					var cnt = returndata.count;					
 					if(returndata.count > 0){
 						ph_numberlist = returndata.numbers;
 						for(var i=0; i != cnt; i++){
 							var cval = ph_numberlist[i].voiceCallbackValue;
 							if(!cval){
 								ph_numberlist[i].linkstatus = "Link";
+								bynocnt++;
 							}else if(cval.localeCompare(appid) == -1){
-								ph_numberlist[i].linkstatus = "-";
+								ph_numberlist[i].linkstatus = "Linked with another application";
 							}else if(cval.localeCompare(appid) != -1){
 								ph_numberlist[i].linkstatus = "Linked";
+								bynocnt++;
 							}	
 						}				
-					}
-					
-								
+					}													
 				} 
-
 				var initial = parseInt(1);
 			</g:evaluate>
 			<script>
@@ -138,11 +138,12 @@
 									<th scope="col" class="table-column-header">${gs.getMessage('Phone number')}</th>
 									<th scope="col" class="table-column-header">${gs.getMessage('Capabilities')}</th>
 									<th scope="col" class="territory table-column-header">${gs.getMessage('Territory')}</th>									
-									<th scope="col" class="configStatus table-column-header">${gs.getMessage('Configured')}</th>
+									<!--<th scope="col" class="configStatus table-column-header">${gs.getMessage('Configured')}</th>-->
 								</tr>
 							</thead>							
 							<tbody id="result" class="list_table_tbody">
 								<j:forEach items="${ph_numberlist}" var="jvar_data">
+									
 									<tr>
 										<td> ${initial}</td>
 										<td> ${jvar_data.msisdn} </td>
@@ -152,7 +153,7 @@
 											</j:if>		
 										</td>
 										<td> ${jvar_data.country} </td>
-										<td>
+										<!--<td>
 											<j:choose>
 											   <j:when test="${jvar_data.linkstatus == 'Link'}">
 												   <button onClick="connectid('${jvar_data.msisdn}')" class="phbtn">${jvar_data.linkstatus}</button>
@@ -160,9 +161,10 @@
 											   
 											   <j:otherwise>${jvar_data.linkstatus}</j:otherwise>
 											</j:choose>
-										</td>
+										</td>-->
 									</tr>	
 									 <g:evaluate>initial = parseInt(initial +1);</g:evaluate>
+									
 								</j:forEach>								
 							</tbody>
 						</table>
