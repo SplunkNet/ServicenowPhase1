@@ -9,19 +9,19 @@
         <name>nexmosms</name>
         <oauth2_profile/>
         <protocol_name/>
-        <rest_endpoint>https://rest.nexmo.com/sms/json</rest_endpoint>
+        <rest_endpoint>https://rest.nexmo.com/sms</rest_endpoint>
         <sys_class_name>sys_rest_message</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-15 13:54:19</sys_created_on>
         <sys_id>a76974b7db553300d94ce4da4b961944</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>nexmosms</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_rest_message_a76974b7db553300d94ce4da4b961944</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-15 13:54:19</sys_updated_on>
+        <sys_updated_on>2019-06-10 09:17:50</sys_updated_on>
         <use_basic_auth>false</use_basic_auth>
         <use_mutual_auth>false</use_mutual_auth>
     </sys_rest_message>
