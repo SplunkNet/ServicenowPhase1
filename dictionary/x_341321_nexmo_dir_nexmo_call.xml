@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Nexmo Call" max_length="40" name="x_341321_nexmo_dir_nexmo_call" type="collection">
-        <element display="true" label="Phone Number" max_length="40" name="phone_number" type="string"/>
+        <element default="Nexmo Test Message" label="Message" max_length="100" name="message" type="string"/>
+        <element default="+14403634670" display="true" label="Phone Number" max_length="40" name="phone_number" type="string"/>
     </element>
 </database>

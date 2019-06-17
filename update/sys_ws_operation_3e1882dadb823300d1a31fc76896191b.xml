@@ -12,7 +12,8 @@
     // implement resource here
 gs.info("------> into DLR GET"+request.pathParams.callback_name);
 	gs.info("------->into DLR GET type"+ request.pathParams.type);
-	gs.info("request. query string:"+request.queryString);
+	gs.info("request query params:"+JSON.stringify(request.queryParams));
+	gs.info("req query string:"+JSON.stringify(request.queryString));
 	var helper = new NexmoHelper();
 	var url;
 	if (request.pathParams.type == 'nexmoml')
@@ -31,12 +32,18 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
 			urlForValidation = url.substring(0, firstColonPos) + url.substring(firstSlashPos);
 	}
 
-	var queryStringArr = request.queryString ? request.queryString.split('&') : [];
+	var queryStringArr = request.queryString ? request.queryString.split(',') : [];
 	var queryKeys = [];
 	for (var i = 0; i < queryStringArr.length; i++) {
-		var pairs = queryStringArr[i].split('=');
+		var pairs = queryStringArr[i].split(':');
 		queryKeys.push(pairs[0]);
 	}
+	
+	//display querystring array
+	for (var j = 0; j < queryStringArr.length; j++) {
+		gs.info("Querystring array:"+"   "+j+" is "+queryStringArr[j] );		
+	}
+	
 	var formData = {};
 	for (var k in request.queryParams) {
 		if (queryKeys.indexOf(k) === -1) {
@@ -50,40 +57,21 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
 	var resp;
 	
 	var cApi  = new NexmoCallbackApi();
-	if (request.pathParams.type == 'nexmoml') {
-		resp = cApi.getNexmomlResponse(request.pathParams.callback_name, request.queryParams);
-		if (!resp)
-			resp = cApi.getDefaultNexmomlResponse();
-		response.setContentType('application/xml');
-		if (resp instanceof NexmomlModel){
-			var saytext = resp._children[0]._text;
-			//"'+resp._children[0]._text+'"
-			//response.getStreamWriter().writeString(resp.toXml());
-			saytext = saytext.replace("&lt;say&gt;", "<say-as interpret-as='character'>");
-			saytext = saytext.replace("&lt;/say&gt;", "</say-as>");
-			saytext = "<speak>"+saytext+"</speak>";
-					
-			var nccotext = '[{"action": "talk","bargeIn": true,"text":"'+saytext+'"},{"action": "input",  "submitOnHash": true}]';
-			
-			
-			response.setContentType('application/json');
-			response.getStreamWriter().writeString(nccotext.toString());
-		}else{
-			response.getStreamWriter().writeString(resp.toString());
-		}			
-	} else if (request.pathParams.type == 'xml') {
-		resp = cApi.getXmlResponse(request.pathParams.callback_name, request.queryParams);
-			if (!resp)
-				resp = cApi.getDefaultXmlResponse();
-			response.setContentType('application/xml');
-			response.getStreamWriter().writeString(resp.toString());
-	} else
-		resp = new sn_ws_err.BadRequestError('Unknown type value specified: ' + request.pathParams.type);		return resp;
+	if (request.pathParams.type == 'nexmoml ') {
+		resp = cApi.getNexmomlResponse(request.pathParams.callback_name, request.queryParams);		
+	} 
+	else if (request.pathParams.type == 'xml') {
+		resp = cApi.getXmlResponse(request.pathParams.callback_name, request.queryParams);		
+	} 
+	else
+		resp = new sn_ws_err.BadRequestError('Unknown type value specified: ' + request.pathParams.type);		
+	
+	return resp;
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_341321_nexmo_dir/nexmosmsdlr/proces/{type}/{callback_name}</operation_uri>
+        <operation_uri>/api/x_341321_nexmo_dir/nexmosmsdlr/process/{type}/{callback_name}</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
-        <relative_path>/proces/{type}/{callback_name}</relative_path>
+        <relative_path>/process/{type}/{callback_name}</relative_path>
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>false</requires_authentication>
@@ -93,14 +81,14 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-06-17 10:34:18</sys_created_on>
         <sys_id>3e1882dadb823300d1a31fc76896191b</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>SIngleDLR</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ws_operation_3e1882dadb823300d1a31fc76896191b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-17 10:38:20</sys_updated_on>
+        <sys_updated_on>2019-06-17 12:02:18</sys_updated_on>
         <web_service_definition display_value="NexmoSMSDLR">da0802dadb823300d1a31fc7689619f3</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
