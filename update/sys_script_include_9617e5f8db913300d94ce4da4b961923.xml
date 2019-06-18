@@ -12,6 +12,20 @@ NexmoNotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJ
 		global.BaseNotifyJsTelephonyDriver.prototype.initialize.apply(this, arguments);
     },
 	
+	getParticipantInfo: function (participantGr) {
+		if (participantGr) {
+			var participantSessionGr = new global.NotifyDatabase().getParticipantSessionRecordForParticipant(participantGr);
+			if (participantSessionGr) {
+				var callGr = participantSessionGr.notify_call.getRefRecord();
+				if (callGr.isValidRecord())
+					return {
+						confSid: participantGr.notify_conference_call.conference_call_id + '',
+						callSid: callGr.call_id + ''
+					};
+			}
+		}
+	},
+	
 	isActive: function () {
 		return true;
 	},
@@ -80,15 +94,135 @@ NexmoNotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJ
 	},
 	
 	kick: function (/*GlideRecord*/ participantRecord) {
-		throw 'Not implemented';
+		var partiInfo = this.getParticipantInfo(participantRecord);
+		if (partiInfo) {
+			var target = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+			target.query();
+			target.next();
+			var today = new GlideDateTime();
+
+			var gdt = new GlideDateTime();
+			gdt.addDaysUTC(1);
+			if (target.expire > today) {
+				JWToken = target.jwt_token.getDecryptedValue().toString();
+			} else {
+				var obj = new JsrsasignMain();
+				var key = target.private_key;
+				var sign = obj.assignTokenparams(key, target.application_id);
+				JWToken = sign;
+				var rec = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+				rec.addQuery('application_id', target.application_id);
+				rec.query();
+				while (rec.next()) {
+					rec.jwt_token = JWToken;
+					rec.expire = gdt;
+					rec.update();
+				}
+			}
+			
+			var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmocall', 'POST');
+			var endpoint = sm.getEndpoint();
+			var request = new sn_ws.RESTMessageV2();
+			request.setEndpoint(endpoint+'/'+partiInfo.callSid);
+			request.setHttpMethod('PUT');
+			request.setRequestHeader("Content-type","application/json");
+			request.setRequestHeader("Authorization","Bearer "+JWToken);
+			request.setRequestBody('{"action": "hangup"}');
+			var responseres = request.execute();
+			var nexmoreqbody = responseres.getBody();
+			var resp = JSON.parse(nexmoreqbody);	
+			if (resp.error)
+				this.logger.error("Error while trying to mute participant " + resp);
+		} else
+			this.logger.error("Could retrive details about the given participant record");
 	},
 	
 	mute: function (/*GlideRecord*/ participantRecord) {
-		throw 'Not implemented';
+		var partiInfo = this.getParticipantInfo(participantRecord);
+		if (partiInfo) {
+			var target = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+			target.query();
+			target.next();
+			var today = new GlideDateTime();
+
+			var gdt = new GlideDateTime();
+			gdt.addDaysUTC(1);
+			if (target.expire > today) {
+				JWToken = target.jwt_token.getDecryptedValue().toString();
+			} else {
+				var obj = new JsrsasignMain();
+				var key = target.private_key;
+				var sign = obj.assignTokenparams(key, target.application_id);
+				JWToken = sign;
+				var rec = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+				rec.addQuery('application_id', target.application_id);
+				rec.query();
+				while (rec.next()) {
+					rec.jwt_token = JWToken;
+					rec.expire = gdt;
+					rec.update();
+				}
+			}
+			
+			var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmocall', 'POST');
+			var endpoint = sm.getEndpoint();
+			var request = new sn_ws.RESTMessageV2();
+			request.setEndpoint(endpoint+'/'+partiInfo.callSid);
+			request.setHttpMethod('PUT');
+			request.setRequestHeader("Content-type","application/json");
+			request.setRequestHeader("Authorization","Bearer "+JWToken);
+			request.setRequestBody('{"action": "earmuff"}');
+			var responseres = request.execute();
+			var nexmoreqbody = responseres.getBody();
+			var resp = JSON.parse(nexmoreqbody);	
+			if (resp.error)
+				this.logger.error("Error while trying to mute participant " + resp);
+		} else
+			this.logger.error("Could retrive details about the given participant record");
 	},
 	
 	unmute: function (/*GlideRecord*/ participantRecord) {
-		throw 'Not implemented';
+		var partiInfo = this.getParticipantInfo(participantRecord);
+		if (partiInfo) {
+			var target = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+			target.query();
+			target.next();
+			var today = new GlideDateTime();
+
+			var gdt = new GlideDateTime();
+			gdt.addDaysUTC(1);
+			if (target.expire > today) {
+				JWToken = target.jwt_token.getDecryptedValue().toString();
+			} else {
+				var obj = new JsrsasignMain();
+				var key = target.private_key;
+				var sign = obj.assignTokenparams(key, target.application_id);
+				JWToken = sign;
+				var rec = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+				rec.addQuery('application_id', target.application_id);
+				rec.query();
+				while (rec.next()) {
+					rec.jwt_token = JWToken;
+					rec.expire = gdt;
+					rec.update();
+				}
+			}
+			
+			var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmocall', 'POST');
+			var endpoint = sm.getEndpoint();
+			var request = new sn_ws.RESTMessageV2();
+			request.setEndpoint(endpoint+'/'+partiInfo.callSid);
+			request.setHttpMethod('PUT');
+			request.setRequestHeader("Content-type","application/json");
+			request.setRequestHeader("Authorization","Bearer "+JWToken);
+			request.setRequestBody('{"action": "unearmuff"}');
+			var responseres = request.execute();
+			var nexmoreqbody = responseres.getBody();
+			var resp = JSON.parse(nexmoreqbody);	
+			if (resp.error)
+				this.logger.error("Error while trying to mute participant " + resp);
+		} else
+			this.logger.error("Could retrive details about the given participant record");
 	},
 	
 	modifyCall: function (/*String*/ callID, /*JSON as String*/ notifyActionJson, /*GlideRecord*/ actionRecord) {
@@ -118,13 +252,13 @@ NexmoNotifyJsTelephonyDriver.prototype = Object.extendsObject(global.BaseNotifyJ
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 09:31:41</sys_created_on>
         <sys_id>9617e5f8db913300d94ce4da4b961923</sys_id>
-        <sys_mod_count>45</sys_mod_count>
+        <sys_mod_count>53</sys_mod_count>
         <sys_name>NexmoNotifyJsTelephonyDriver</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_9617e5f8db913300d94ce4da4b961923</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 11:53:10</sys_updated_on>
+        <sys_updated_on>2019-06-18 12:48:05</sys_updated_on>
     </sys_script_include>
 </record_update>
