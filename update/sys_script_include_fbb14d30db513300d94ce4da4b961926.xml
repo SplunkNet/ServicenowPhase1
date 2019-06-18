@@ -13,6 +13,7 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
     },
 
 	onStart: function(from, to, body) {
+		gs.info("--->into sms receipe");
 		this.data.fromNo = from;
 		/*if (validityPeriod) {
 			validityPeriod = parseInt(validityPeriod);
@@ -28,11 +29,12 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
 		var helper = new NexmoHelper();
 		from = helper.getNexmoServiceId(from);
 		from = from.substr(1);
+		//gs.info("from:"+from+"To:"+to);
 		var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmosms', 'POST');
 		var endpoint = sm.getEndpoint();
 		
 		var gr = new GlideRecord ('x_341321_nexmo_dir_nexmo_config');
-		gr.orderByDesc('Created');
+		gr.orderByDesc('sys_created_on');
 		gr.setLimit(1);
 		gr.query();
 		if (gr.next())
@@ -46,43 +48,11 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
 		request.setRequestHeader("Content-type","application/json");
 		//request.setRequestHeader("Authorization","Bearer "+JWToken);
 		tonum = to.substr(1);
+	
 request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secret.getDecryptedValue()+'","from":"'+from+'","to":"'+tonum+'","text":"'+body+'"}');
-		var responseres = request.execute();		
+		var responseres = request.execute();			
 		var nexmoreqbody = responseres.getBody();
-		
-		var TmpArr = nexmoreqbody? nexmoreqbody.split(',') : [];
-	var tmpKeys = [];
-	for (var i = 0; i < TmpArr.length; i++) {
-		var tpairs = TmpArr[i].split(':');
-		tmpKeys.push(tpairs[0]);
-	}
-		//display querystring array
-		var tmpMsgId;
-	for (var j = 0; j < TmpArr.length; j++) {
-		var tpairs1 = TmpArr[j].split(':');
-		var tmp_tpairs1=tpairs1[0].replace("\"","").slice(1,-1);
-		if(tmp_tpairs1=="message-id")
-			{
-				tmpMsgId=tpairs1[1];
-			}
-	}
-		
-		//msg id updtion in notify_messages table
-		var gr_msg = new GlideRecord ('notify_message');
-		gr_msg.orderByDesc('Created');
-		gr_msg.setLimit(1);
-		gr_msg.query();
-		if (gr_msg.next())
-		{
-			var msgfrom=gr_msg.getValue("notify_number");
-			var msgto=gr_msg.getValue("phone_number");
-			var msgId=gr_msg.getValue("message_id");
-			if(msgfrom==from && msgto==tonum && msgId=="")
-				{
-					gr_msg.setValue("message_id",tmpMsgId);
-				}
-		}
-		
+		gs.info("msg sending repsonse:"+nexmoreqbody);
 		
 		var resp = JSON.parse(nexmoreqbody);
 		if (resp.error) {
@@ -94,6 +64,8 @@ request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secre
 			if (MessageSid)
 				return MessageSid;
 		}
+		
+		return nexmoreqbody;
 	},
 
 	onSMSStatus: function (p) {
@@ -110,13 +82,13 @@ request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secre
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:48:43</sys_created_on>
         <sys_id>fbb14d30db513300d94ce4da4b961926</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>66</sys_mod_count>
         <sys_name>NotifyNexmoOutboundSMSRecipe</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_fbb14d30db513300d94ce4da4b961926</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 11:55:20</sys_updated_on>
+        <sys_updated_on>2019-06-18 12:51:02</sys_updated_on>
     </sys_script_include>
 </record_update>

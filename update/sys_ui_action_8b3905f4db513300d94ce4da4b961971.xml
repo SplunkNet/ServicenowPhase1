@@ -37,14 +37,74 @@ var from;
 while(gr.next())
 		{
 	from = gr.number;
+	//gs.info("from bef :"+from);
 		}
 from = gr.number;
+//gs.info("from after:"+from);
    var msgbody=current.message; 
 var to = current.phone_number;
-
+gs.info("------------>into send sms  from:"+from+"   to:"+to+"msg body:"+msgbody);
 var notify = new sn_notify.NotifyScoped();
 var msgResponse = notify.sendSMS(from,to,msgbody);
+gs.info("msg resp:"+msgResponse);
 
+var TmpArr = msgResponse? msgResponse.split(',') : [];
+	var tmpKeys = [];
+	for (var i = 0; i < TmpArr.length; i++) {
+		var tpairs = TmpArr[i].split(':');
+		tmpKeys.push(tpairs[0]);
+	}
+		//display querystring array
+		var tmpMsgId;
+	for (var j = 0; j < TmpArr.length; j++) 
+	{
+		//gs.info("text array:"+"   "+j+" is "+TmpArr[j] );	
+		var tpairs1 = TmpArr[j].split(':');
+		var tmp_tpairs1=tpairs1[0].replace("\"","").slice(1,-1).trim();
+		gs.info("Property part 1:"+tmp_tpairs1+"        part 2:"+tpairs1[1]);
+		//gs.info(tmp_tpairs1);
+		
+		var gr_msg1 = new GlideRecord ('notify_message');
+		gr_msg1.orderByDesc('sys_created_on');
+		gr_msg1.setLimit(1);
+		gr_msg1.query();			
+		if (gr_msg1.next())
+		{			
+			var tbody=gr_msg1.getValue("body");
+			gs.info("recent message:"+tbody);
+			var tmsgfrom=gr_msg1.getDisplayValue("notify_number").replace("+","").trim();
+			var tmsgto=gr_msg1.getValue("phone_number").replace("+","").trim();
+			gs.info(tmsgfrom+"<=========>"+tmsgto);
+			from=from.replace("+","").trim();
+			tonum=tonum.replace("+","").trim();
+			//if(tmsgfrom==from && tmsgto==tonum && gr_msg1.orderByDesc('Created'))	
+		//	var chkStatus=gr_msg1.isNewRecord();
+			//gs.info("new record===>"+chkStatus);
+			
+			//if(!chkStatus)
+			//{ 
+			//	var flag=0;
+			//	gs.info("inside hasnext");
+				if(tmp_tpairs1 == 'message-id')
+				{
+					tmpMsgId=tpairs1[1].replace("\"","").slice(1,-1).trim();
+					gs.info("New msg id:"+tmpMsgId);
+					if(tbody==msgbody)
+						{
+							gr_msg1.setValue("message_id",tmpMsgId);
+							gr_msg1.update();
+							gs.info("here is the record updated...");
+						}
+					else{
+						gr_msg1.next();
+						gs.info("the record not found...");
+						}
+				}		
+				
+			}
+		}
+	
+		
 // var foo =new postNexmomsg();
 // foo.sendsmsusingchannel();]]></script>
         <show_insert>true</show_insert>
@@ -57,7 +117,7 @@ var msgResponse = notify.sendSMS(from,to,msgbody);
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>8b3905f4db513300d94ce4da4b961971</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>SendSMS</sys_name>
         <sys_overrides/>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
@@ -65,7 +125,7 @@ var msgResponse = notify.sendSMS(from,to,msgbody);
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_action_8b3905f4db513300d94ce4da4b961971</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 11:58:30</sys_updated_on>
+        <sys_updated_on>2019-06-18 12:43:14</sys_updated_on>
         <table>x_341321_nexmo_dir_nexmo_call</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
