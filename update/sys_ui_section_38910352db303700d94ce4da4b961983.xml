@@ -4,13 +4,13 @@
             <element>api_key</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-06-07 13:37:03</sys_created_on>
-            <sys_id>b8225343db717300d94ce4da4b961918</sys_id>
+            <sys_created_on>2019-06-18 09:32:01</sys_created_on>
+            <sys_id>be8303eedbce3300d94ce4da4b96190e</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-06-07 13:37:03</sys_updated_on>
+            <sys_updated_on>2019-06-18 09:32:01</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,41 +18,55 @@
             <element>api_secret</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-06-07 13:37:03</sys_created_on>
-            <sys_id>3c225343db717300d94ce4da4b961918</sys_id>
+            <sys_created_on>2019-06-18 09:32:01</sys_created_on>
+            <sys_id>768303eedbce3300d94ce4da4b96190f</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-06-07 13:37:03</sys_updated_on>
+            <sys_updated_on>2019-06-18 09:32:01</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-06-18 09:32:01</sys_created_on>
+            <sys_id>f68303eedbce3300d94ce4da4b96190f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-06-18 09:32:01</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>x_341321_nexmo_dir_sn_nexmo_direct_nexmo_direct_show_token_ui.xml</element>
-            <position>2</position>
+            <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-06-07 13:37:03</sys_created_on>
-            <sys_id>bc225343db717300d94ce4da4b961918</sys_id>
+            <sys_created_on>2019-06-18 09:32:01</sys_created_on>
+            <sys_id>7a8303eedbce3300d94ce4da4b96190f</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Nexmo Direct Show Token UI">55a6467bdb213300d94ce4da4b9619e1</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-06-07 13:37:03</sys_updated_on>
+            <sys_updated_on>2019-06-18 09:32:01</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>x_341321_nexmo_dir_list_nexmo_direct_phone_numbers.xml</element>
-            <position>3</position>
+            <position>4</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2019-06-07 13:37:03</sys_created_on>
-            <sys_id>f0225343db717300d94ce4da4b961919</sys_id>
+            <sys_created_on>2019-06-18 09:32:01</sys_created_on>
+            <sys_id>be8303eedbce3300d94ce4da4b96190f</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="List Nexmo Phone Numbers">69c4423bdb213300d94ce4da4b9619ec</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_341321_nexmo_dir_nexmo_config" sys_domain="global" view="Default view">38910352db303700d94ce4da4b961983</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2019-06-07 13:37:03</sys_updated_on>
+            <sys_updated_on>2019-06-18 09:32:01</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>

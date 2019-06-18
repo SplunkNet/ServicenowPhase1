@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element attributes="update_synch=true" extends="sys_metadata" label="Nexmo Config" max_length="40" name="x_341321_nexmo_dir_nexmo_config" type="collection">
         <element label="Answer URL" mandatory="true" max_length="1000" name="answer_url" type="string"/>
-        <element label="API Key" max_length="255" name="api_key" type="string"/>
-        <element label="API Secret" max_length="255" name="api_secret" type="password2"/>
+        <element label="API Key" mandatory="true" max_length="255" name="api_key" type="string"/>
+        <element label="API Secret" mandatory="true" max_length="255" name="api_secret" type="password2"/>
         <element label="Application ID" mandatory="true" max_length="255" name="application_id" type="string"/>
         <element default="Servicenow_Nexmo" label="Application Name" max_length="40" name="application_name" type="string"/>
         <element default="voice,sms" label="Application Type" mandatory="true" max_length="40" name="application_type" type="string"/>
@@ -14,6 +14,6 @@
         <element label="linkstate" max_length="40" name="linkstate" type="boolean"/>
         <element label="Private Key" max_length="10000" name="private_key" type="string"/>
         <element label="Public Key" max_length="10000" name="public_key" type="string"/>
-        <element label="status" max_length="40" name="status" type="boolean"/>
+        <element label="status" max_length="40" name="status" read_only="true" type="boolean"/>
     </element>
 </database>
