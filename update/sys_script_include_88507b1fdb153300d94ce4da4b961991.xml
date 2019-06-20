@@ -515,45 +515,53 @@
 	  logError: function (resp) {
 		gs.addErrorMessage(gs.getMessage("Twilio responded with error: {0}", [this._formatErr(resp)]));
 	  },
-		disconnect: function () {
-			var appId = this._getHelper().getConfig().application_id;
-			if (appId) {
-				var resp = this.getIncomingPhoneNumbers();
-				var params;
-				if (!!resp.error)
-					this.logError(resp);
-				else {
-					var numbers = resp.numbers;
-					for (var i in numbers) {
-						params = {};
-						if (numbers[i].voiceCallbackValue == appId || numbers[i].voiceCallbackValue == appId) {
-							params.phone_sid = numbers[i].sid;
-							params.z_application_sid = '';
-		// api.updateIncomingPhoneNumber(params);
+		
+	disconnect: function () {
+		var appId = this._getHelper().getConfig().application_id;
+		if (appId) {
+			var resp = this.getIncomingPhoneNumbers();
+			var params;
+			if (!!resp.error)
+				this.logError(resp);
+			else {
+				var numbers = resp.numbers;
+				for (var i in numbers) {
+					params = {};
+					if (numbers[i].voiceCallbackValue == appId || numbers[i].voiceCallbackValue == appId) {
+						params.phone_sid = numbers[i].sid;
+						params.z_application_sid = '';
+					}
+				}
+			}
+			var res = this.deleteApplication(appId);
+			if (res) {
+				if (res.type == 'UNAUTHORIZED')
+					gs.addErrorMessage(gs.getMessage("Nexmo responded with error: {0}", [this._formatErr(res)]));
+			}
+			var nexmoHelper = this._getHelper();
+			var today = new GlideDateTime();
+			var toBeUpdated = {
+				'api_key' : '',
+				'api_secret': '',
+				'application_id': '',
+				'status' : false,
+				'answer_url' : '',
+				'event_url' : '',
+				'expire' : today,
+				'private_key' : '',
+				'jwt_token' : ''
+			};
+			var gr = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
+			if (nexmoHelper.saveConfig(toBeUpdated, null, false, true)) {
+			/*if(gr.deleteMultiple()){*/
+				new global.NotifyDatabase().unsyncNotifyNumbersForDriver(nexmoHelper.DRIVER_NAME);
+				gs.getSession().putClientData("sn_nexmo_direct.suppress_form_msg", true);
+				gs.addInfoMessage(gs.getMessage("Disconnected from Nexmo"));
+				return true;
+			}
+			return false;
 		}
-		}
-		}
-		var res = this.deleteApplication(appId);
-		if (res) {
-			if (res.type == 'UNAUTHORIZED')
-				gs.addErrorMessage(gs.getMessage("Nexmo responded with error: {0}", [this._formatErr(res)]));
-		}
-		var nexmoHelper = this._getHelper();
-		var toBeUpdated = {
-		 'api_key': '',
-		 'api_secret': '',
-		'application_id': '',
-		'status' : false
-		};
-		if (nexmoHelper.saveConfig(toBeUpdated, null, false, true)) {
-			new global.NotifyDatabase().unsyncNotifyNumbersForDriver(nexmoHelper.DRIVER_NAME);
-			gs.getSession().putClientData("sn_nexmo_direct.suppress_form_msg", true);
-			gs.addInfoMessage(gs.getMessage("Disconnected from Nexmo"));
-			return true;
-		}
-		return false;
-		}
-		},
+	},
 
 	getIncomingPhoneNumbers: function () {
 		var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmogetph', 'Default GET');
@@ -669,13 +677,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-14 13:58:08</sys_created_on>
         <sys_id>88507b1fdb153300d94ce4da4b961991</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>28</sys_mod_count>
         <sys_name>NexmoDirectClient</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_88507b1fdb153300d94ce4da4b961991</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 11:52:54</sys_updated_on>
+        <sys_updated_on>2019-06-20 09:38:15</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -12,7 +12,8 @@
         <element label="JWT_Token" max_length="60000" name="jwt_token" type="password2"/>
         <element label="linkmessage" max_length="200" name="linkmessage" type="string"/>
         <element label="linkstate" max_length="40" name="linkstate" type="boolean"/>
-        <element label="Private Key" max_length="10000" name="private_key" type="string"/>
+        <element label="Private Key" max_length="10000" name="private_key" type="password2"/>
         <element label="status" max_length="40" name="status" read_only="true" type="boolean"/>
+        <element label="New Icon" max_length="100" name="u_icon_2" type="icon"/>
     </element>
 </database>

@@ -17,8 +17,8 @@
 			var today = new GlideDateTime();
 			ApplicationData.api_key = current.getElement('api_key').toString();
 			ApplicationData.api_secret = current.getElement('api_secret').getDecryptedValue().toString();
+			ApplicationData.type = "voice";
 			ApplicationData.name = "servicenow_nexmo";
-			ApplicationData.type = appType.toString();
 			ApplicationData.answer_url = answerurl.toString();
 			ApplicationData.event_url = eventurl.toString();
 			ApplicationData.event_method = "GET";
@@ -34,47 +34,61 @@
 			
 			var responsebody = responseres.getBody();
 			var obj = JSON.parse(responsebody);	
-			
 			if(obj.type == "UNAUTHORIZED"){
 				gs.addErrorMessage(gs.getMessage("<b>Please enter valid API Key and Secret Key</b>"));
 				return "UNAUTHORIZED";
 			}
-			var gr = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
-			/*gr.initialize();*/
-			gr.addQuery('internal_name', 'main_and_only');
-			gr.query();
+			var gr = new GlideRecord('x_341321_nexmo_dir_nexmo_config');			
+			/*gr.addQuery('internal_name', 'main_and_only');
+			gr.query();*/
 			var app_id = JSON.stringify(obj.id);
 			var app_private_key = JSON.stringify(obj.keys.private_key);
 			/*var app_public_key = JSON.stringify(obj.keys.public_key);*/
-			var app_name = JSON.stringify(obj.name);			
-			while (gr.next()) {
-
-				gr.application_id = app_id.replace(/\"/g, "");
-				gr.application_type = appType.toString();
-				gr.answer_url =  answerurl.toString();
-				gr.event_url =  eventurl.toString();
-				gr.expire = today;
-				gr.application_name = app_name.replace(/\"/g, "");
-				var tmpprivate_key = app_private_key.replace(/\\n/g, "");
-				tmpprivate_key = tmpprivate_key.replace(/\"/g, "");
-				gr.private_key = tmpprivate_key;
-
-				/*var tmppublic_key = app_public_key.replace(/\\n/g, "");
-				tmppublic_key= tmppublic_key.replace(/^"(.*)"$/, '$1');
-				gr.public_key = tmppublic_key;*/
-				gr.api_key = current.getElement('api_key').toString();
-				gr.api_secret = current.getElement('api_secret').toString();
-				gr.status = true;
-				gr.linkstate=true;
-				gr.linkmessage="";
-				gr.update();
+			var app_name = JSON.stringify(obj.name);		
+			var tmpprivate_key;
+			if(app_private_key) {
+				gr.addQuery('internal_name', 'main_and_only');
+				gr.query();
+				if(!gr.next()){
+					gr.initialize(); 
+					gr.application_id = app_id.replace(/\"/g, "");
+					gr.answer_url =  answerurl.toString();
+					gr.event_url =  eventurl.toString();
+					gr.expire = today;
+					gr.application_name = app_name.replace(/\"/g, "");
+					tmpprivate_key = app_private_key.replace(/\\n/g, "");
+					tmpprivate_key = tmpprivate_key.replace(/\"/g, "");
+					gr.private_key = tmpprivate_key;
+					gr.internal_name = 'main_and_only';
+					/*var tmppublic_key = app_public_key.replace(/\\n/g, "");
+					tmppublic_key= tmppublic_key.replace(/^"(.*)"$/, '$1');
+					gr.public_key = tmppublic_key;*/
+					gr.api_key = current.getElement('api_key').toString();
+					gr.api_secret = current.getElement('api_secret').toString();
+					gr.status = true;
+					gr.linkstate=true;
+					gr.linkmessage="";				
+					gr.insert();
+				}else{
+					gr.application_id = app_id.replace(/\"/g, "");
+					gr.application_type = appType.toString();
+					gr.answer_url =  answerurl.toString();
+					gr.event_url =  eventurl.toString();
+					gr.expire = today;
+					gr.application_name = app_name.replace(/\"/g, "");
+					tmpprivate_key = app_private_key.replace(/\\n/g, "");
+					tmpprivate_key = tmpprivate_key.replace(/\"/g, "");
+					gr.private_key = tmpprivate_key;
+					gr.api_key = current.getElement('api_key').toString();
+					gr.api_secret = current.getElement('api_secret').toString();
+					gr.status = true;
+					gr.update();
+				}
 			}
-			var tmpprivate_keys = app_private_key.replace(/\\n/g, "");
-			tmpprivate_keys = tmpprivate_keys.replace(/\"/g, "");
-			//gr.insert();
-			var arrToken = [ApplicationData.api_key, ApplicationData.api_secret,JSON.stringify(obj.id), tmpprivate_keys];
+			return true;
+			/*var arrToken = [ApplicationData.api_key, ApplicationData.api_secret,JSON.stringify(obj.id), tmpprivate_keys];
 			this.getJwtToken(arrToken);
-			return arrToken;
+			return arrToken;*/
 		},
 		
 		getInstanceUrl: function () {
@@ -109,13 +123,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:40:36</sys_created_on>
         <sys_id>bdef38fcdb113300d94ce4da4b961957</sys_id>
-        <sys_mod_count>63</sys_mod_count>
+        <sys_mod_count>74</sys_mod_count>
         <sys_name>NexmoApplicationCreation</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_bdef38fcdb113300d94ce4da4b961957</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 09:48:24</sys_updated_on>
+        <sys_updated_on>2019-06-20 07:37:13</sys_updated_on>
     </sys_script_include>
 </record_update>
