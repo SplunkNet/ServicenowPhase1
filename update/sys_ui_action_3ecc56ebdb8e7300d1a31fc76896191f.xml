@@ -25,7 +25,7 @@
         <list_link>false</list_link>
         <list_save_with_form_button>false</list_save_with_form_button>
         <list_style/>
-        <name>SendSMS</name>
+        <name>Send Alert</name>
         <onclick/>
         <order>100</order>
         <script><![CDATA[var notify = new sn_notify.NotifyScoped();
@@ -38,9 +38,15 @@ while(gr.next())
 		{	from = gr.number;			}
 from = gr.number;
 var msgbody=current.message; 
-var to = current.phone_number;
-gs.info("------------>into send sms  from:"+from+"   to:"+to+"msg body:"+msgbody);
+var toNumber = current.phone_number;
+gs.info("------------>into send sms  from:"+from+"   to:"+toNumber+"msg body:"+msgbody);
 
+var tmp_toArr=[];
+tmp_toArr=toNumber.split(',');
+for(var i=0;i< tmp_toArr.length;i++)
+{
+gs.info("to numbers:"+tmp_toArr[i])	;
+	var to=tmp_toArr[i];
 var notify = new sn_notify.NotifyScoped();
 var msgResponse = notify.sendSMS(from,to,msgbody);
 gs.info("msg resp:"+msgResponse);
@@ -70,26 +76,26 @@ gs.info("msg response not null");
 			
 		}
 }
-	]]></script>
+}]]></script>
         <show_insert>true</show_insert>
         <show_multiple_update>false</show_multiple_update>
         <show_query>false</show_query>
         <show_update>true</show_update>
         <sys_class_name>sys_ui_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2019-05-06 07:21:40</sys_created_on>
+        <sys_created_on>2019-06-21 09:19:41</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>8b3905f4db513300d94ce4da4b961971</sys_id>
-        <sys_mod_count>30</sys_mod_count>
-        <sys_name>SendSMS</sys_name>
+        <sys_id>3ecc56ebdb8e7300d1a31fc76896191f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Send Alert</sys_name>
         <sys_overrides/>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
-        <sys_update_name>sys_ui_action_8b3905f4db513300d94ce4da4b961971</sys_update_name>
+        <sys_update_name>sys_ui_action_3ecc56ebdb8e7300d1a31fc76896191f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-21 09:16:13</sys_updated_on>
+        <sys_updated_on>2019-06-21 09:27:23</sys_updated_on>
         <table>x_341321_nexmo_dir_nexmo_call</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

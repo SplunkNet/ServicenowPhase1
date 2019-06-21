@@ -10,9 +10,9 @@
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 
     // implement resource here
-gs.info("------> into DLR GET"+request.pathParams.callback_name);
-	gs.info("------->into DLR GET type"+ request.pathParams.type);
-	gs.info("request query params:"+JSON.stringify(request.queryParams));
+//gs.info("------> into DLR GET"+request.pathParams.callback_name);
+//	gs.info("------->into DLR GET type"+ request.pathParams.type);
+	//gs.info("request query params:"+JSON.stringify(request.queryParams));
 	gs.info("req query string:"+JSON.stringify(request.queryString));
 	var helper = new NexmoHelper();
 	var url;
@@ -31,20 +31,38 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
 		if (firstColonPos !== -1 && firstColonPos < firstSlashPos)
 			urlForValidation = url.substring(0, firstColonPos) + url.substring(firstSlashPos);
 	}
-
-	var queryStringArr = request.queryString ? request.queryString.split(',') : [];
-	var queryKeys = [];
+	var sMsgID,sStatus;
+	var queryStringArr = request.queryString.split('&');
+	var queryVal = [],queryAttr=[],Attr,Val;
 	for (var i = 0; i < queryStringArr.length; i++) {
-		var pairs = queryStringArr[i].split(':');
-		queryKeys.push(pairs[0]);
+		var pairs = queryStringArr[i].split('=');
+		queryAttr.push(pairs[0]);
+		queryVal.push(pairs[1]);
+		if(pairs[0]=="messageId")
+			{ sMsgID = pairs[1];}
+		if(pairs[0]=="status")
+			{ sStatus = pairs[1];}
+		
 	}
+	var gr_msg1 = new GlideRecord ('notify_message');
+	gr_msg1.addQuery("message_id",sMsgID);
+		gr_msg1.orderByDesc('sys_created_on');
+		gr_msg1.setLimit(1);
+		gr_msg1.query();			
+		if (gr_msg1.next())
+		{
+			sStatus=sStatus.replaceAll("\"","");
+			gr_msg1.setValue("status",sStatus);
+			gr_msg1.update();
+			gs.info("Status updated...");			
+		}
 	
 	//display querystring array
 /*	for (var j = 0; j < queryStringArr.length; j++) {
 		gs.info("Querystring array:"+"   "+j+" is "+queryStringArr[j] );		
 	}*/
 	
-	var formData = {};
+/*	var formData = {};
 	for (var k in request.queryParams) {
 		if (queryKeys.indexOf(k) === -1) {
 			var valsArr = request.queryParams[k];
@@ -53,7 +71,7 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
 			else
 				formData[k] = "";
 		}
-	}	
+	}	*/
 	var resp;
 	
 	var cApi  = new NexmoCallbackApi();
@@ -81,14 +99,14 @@ gs.info("------> into DLR GET"+request.pathParams.callback_name);
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-06-17 10:34:18</sys_created_on>
         <sys_id>3e1882dadb823300d1a31fc76896191b</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>SIngleDLR</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ws_operation_3e1882dadb823300d1a31fc76896191b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-18 12:48:35</sys_updated_on>
+        <sys_updated_on>2019-06-21 09:42:16</sys_updated_on>
         <web_service_definition display_value="NexmoSMSDLR">da0802dadb823300d1a31fc7689619f3</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
