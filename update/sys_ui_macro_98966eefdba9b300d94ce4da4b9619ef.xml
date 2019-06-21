@@ -10,14 +10,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-27 13:29:20</sys_created_on>
         <sys_id>98966eefdba9b300d94ce4da4b9619ef</sys_id>
-        <sys_mod_count>128</sys_mod_count>
+        <sys_mod_count>130</sys_mod_count>
         <sys_name>list_nexmo_direct_phone_numbers</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ui_macro_98966eefdba9b300d94ce4da4b9619ef</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-20 08:49:48</sys_updated_on>
+        <sys_updated_on>2019-06-20 11:23:59</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" 
 	xmlns:j="jelly:core" 
@@ -100,17 +100,17 @@
 				var initial = parseInt(1);
 			</g:evaluate>
 			
-			<j:if test="${!configstatus}">
+			<!-- <j:if test="${!configstatus}">
 				<div class="nofndata">
 					<h5> Status : Inactive </h5>
 				</div>
-			</j:if>
+			</j:if> -->
 
 			<j:if test="${configstatus}">
-				<div class="nofndata">
+				<!-- <div class="nofndata">
 					<h5> Status : Active </h5>
-				</div>
-				<div class="ph_data">
+				</div> -->
+				<div class="ph_data" id="ph_data">
 					<div id="phs">
 						<table class="table table-hover original-table list-grid table-striped" tabindex="0">
 							<thead class="table-body-headers">
@@ -156,6 +156,15 @@
 		</td>
 	</tr>
 
-</j:jelly>]]></xml>
+</j:jelly>
+<g2:evaluate var="configstatus">
+	var configstatus = new NexmoHelper().isConnectNexmo();
+</g2:evaluate>
+<script type="text/javascript">	
+	if(configstatus)
+		document.getElementById("ph_data").style.display = "block";
+	else
+		document.getElementById("ph_data").style.display = "none";
+</script>]]></xml>
     </sys_ui_macro>
 </record_update>

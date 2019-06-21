@@ -551,7 +551,6 @@
 				'private_key' : '',
 				'jwt_token' : ''
 			};
-			var gr = new GlideRecord('x_341321_nexmo_dir_nexmo_config');
 			if (nexmoHelper.saveConfig(toBeUpdated, null, false, true)) {
 			/*if(gr.deleteMultiple()){*/
 				new global.NotifyDatabase().unsyncNotifyNumbersForDriver(nexmoHelper.DRIVER_NAME);
@@ -671,19 +670,31 @@
 		return this._helper;
 	},
 
+	
+	newdemocall: function(){
+			var gr = new GlideRecord ('notify_number');
+			gr.orderBy('Created');
+			gr.setLimit(1);
+			gr.query();
+			gr.next();
+			var from = gr.number;
+			var notify = new sn_notify.NotifyScoped();
+			var tonum = current.phone_number;	
+			var phoneNumbers = notify.call(from, tonum);
+	},
 	  type: 'NexmoDirectClient'
 	});]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-14 13:58:08</sys_created_on>
         <sys_id>88507b1fdb153300d94ce4da4b961991</sys_id>
-        <sys_mod_count>28</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>NexmoDirectClient</sys_name>
         <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_88507b1fdb153300d94ce4da4b961991</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-20 09:38:15</sys_updated_on>
+        <sys_updated_on>2019-06-21 05:08:51</sys_updated_on>
     </sys_script_include>
 </record_update>
