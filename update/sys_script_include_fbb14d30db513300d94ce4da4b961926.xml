@@ -15,21 +15,11 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
 	onStart: function(from, to, body) {
 		gs.info("--->into sms receipe");
 		this.data.fromNo = from;
-		/*if (validityPeriod) {
-			validityPeriod = parseInt(validityPeriod);
-			if (validityPeriod <= 0)
-				validityPeriod = 100;
-		} else
-			validityPeriod = 100;
-		this.data.validityPeriod = validityPeriod;
-		this.saveData();*/
-
-		//var api = new sn_twilio_direct.TwilioApi();
+		
 		var eventUrl = this.ctx.getXmlUrl('SMSStatus', this.getCallback('onSMSStatus'));
 		var helper = new NexmoHelper();
 		from = helper.getNexmoServiceId(from);
 		from = from.substr(1);
-		//gs.info("from:"+from+"To:"+to);
 		var sm = new sn_ws.RESTMessageV2('x_341321_nexmo_dir.nexmosms', 'POST');
 		var endpoint = sm.getEndpoint();
 		
@@ -45,8 +35,7 @@ NotifyNexmoOutboundSMSRecipe.prototype = Object.extendsObject(BaseNotifyNexmoSMS
 		var request = new sn_ws.RESTMessageV2();
 		request.setEndpoint(endpoint);
 		request.setHttpMethod('POST');
-		request.setRequestHeader("Content-type","application/json");
-		//request.setRequestHeader("Authorization","Bearer "+JWToken);
+		request.setRequestHeader("Content-type","application/json");		
 		tonum = to.substr(1);
 	
 request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secret.getDecryptedValue()+'","from":"'+from+'","to":"'+tonum+'","text":"'+body+'"}');
@@ -82,13 +71,13 @@ request.setRequestBody('{"api_key":"'+gr.api_key+'","api_secret":"'+gr.api_secre
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-06 06:48:43</sys_created_on>
         <sys_id>fbb14d30db513300d94ce4da4b961926</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>68</sys_mod_count>
         <sys_name>NotifyNexmoOutboundSMSRecipe</sys_name>
-        <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
+        <sys_package display_value="Nexmo Direct Driver SMS" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy>read</sys_policy>
-        <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
+        <sys_scope display_value="Nexmo Direct Driver SMS">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_script_include_fbb14d30db513300d94ce4da4b961926</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-21 09:29:19</sys_updated_on>
+        <sys_updated_on>2019-06-25 11:40:36</sys_updated_on>
     </sys_script_include>
 </record_update>

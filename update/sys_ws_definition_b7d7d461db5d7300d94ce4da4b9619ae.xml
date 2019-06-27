@@ -20,9 +20,9 @@
         <sys_id>b7d7d461db5d7300d94ce4da4b9619ae</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Nexmo call event</sys_name>
-        <sys_package display_value="Nexmo Direct Driver" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
+        <sys_package display_value="Nexmo Direct Driver SMS" source="x_341321_nexmo_dir">d149fedadbfcf300d94ce4da4b96199e</sys_package>
         <sys_policy/>
-        <sys_scope display_value="Nexmo Direct Driver">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
+        <sys_scope display_value="Nexmo Direct Driver SMS">d149fedadbfcf300d94ce4da4b96199e</sys_scope>
         <sys_update_name>sys_ws_definition_b7d7d461db5d7300d94ce4da4b9619ae</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2019-05-08 11:41:28</sys_updated_on>
